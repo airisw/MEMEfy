@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LoginForm: View {
+    @EnvironmentObject var loginManager: LoginManager
     @State private var name = ""
     @State private var roomCode = ""
     
@@ -20,6 +21,7 @@ struct LoginForm: View {
             
             Button(action: {
                 print("Form submitted with \(name) and \(roomCode)")
+                loginManager.startGame(name: name, roomCode: roomCode)
             }) {
                 Text("Join Room")
             }
@@ -30,5 +32,6 @@ struct LoginForm: View {
 struct LoginForm_Previews: PreviewProvider {
     static var previews: some View {
         LoginForm()
+            .environmentObject(LoginManager(gameRooms: []))
     }
 }

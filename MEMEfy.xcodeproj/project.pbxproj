@@ -25,6 +25,8 @@
 		22A4B6252A7314E2003538BD /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A4B6242A7314E2003538BD /* ResultView.swift */; };
 		22A4B6282A731B9C003538BD /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 22A4B6272A731B9C003538BD /* FirebaseFirestore */; };
 		22A4B62A2A731B9C003538BD /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 22A4B6292A731B9C003538BD /* FirebaseFirestoreSwift */; };
+		22A4B62F2A73F52F003538BD /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A4B62E2A73F52F003538BD /* LoginManager.swift */; };
+		22A4B64B2A7408E9003538BD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22A4B64A2A7408E8003538BD /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,7 +47,8 @@
 		22A4B6202A7314C1003538BD /* VotingPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingPlayerView.swift; sourceTree = "<group>"; };
 		22A4B6222A7314CF003538BD /* VotingJudgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingJudgeView.swift; sourceTree = "<group>"; };
 		22A4B6242A7314E2003538BD /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
-		22A4B62D2A735728003538BD /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		22A4B62E2A73F52F003538BD /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
+		22A4B64A2A7408E8003538BD /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,12 +83,12 @@
 		22A4B5BA2A70DD39003538BD /* MEMEfy */ = {
 			isa = PBXGroup;
 			children = (
+				22A4B64C2A740D00003538BD /* Networking */,
 				22A4B6132A72FB76003538BD /* Models */,
 				22A4B6122A72FB4E003538BD /* Views */,
 				22A4B5BB2A70DD39003538BD /* MEMEfyApp.swift */,
 				22A4B5BD2A70DD39003538BD /* ContentView.swift */,
-				22A4B62D2A735728003538BD /* GoogleService-Info.plist */,
-				22A4B5D22A70F457003538BD /* Components */,
+				22A4B64A2A7408E8003538BD /* GoogleService-Info.plist */,
 				22A4B5BF2A70DD3B003538BD /* Assets.xcassets */,
 				22A4B5C12A70DD3B003538BD /* Preview Content */,
 			);
@@ -120,6 +123,7 @@
 				22A4B6202A7314C1003538BD /* VotingPlayerView.swift */,
 				22A4B6222A7314CF003538BD /* VotingJudgeView.swift */,
 				22A4B6242A7314E2003538BD /* ResultView.swift */,
+				22A4B5D22A70F457003538BD /* Components */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -131,6 +135,14 @@
 				22A4B6162A7303D6003538BD /* PromptModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		22A4B64C2A740D00003538BD /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				22A4B62E2A73F52F003538BD /* LoginManager.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,6 +212,7 @@
 			files = (
 				22A4B5C32A70DD3B003538BD /* Preview Assets.xcassets in Resources */,
 				22A4B5C02A70DD3B003538BD /* Assets.xcassets in Resources */,
+				22A4B64B2A7408E9003538BD /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +234,7 @@
 				22A4B6192A731465003538BD /* WaitingRoomView.swift in Sources */,
 				22A4B6172A7303D6003538BD /* PromptModel.swift in Sources */,
 				22A4B5D42A70F51B003538BD /* LoginForm.swift in Sources */,
+				22A4B62F2A73F52F003538BD /* LoginManager.swift in Sources */,
 				22A4B61B2A731481003538BD /* PersonalizePromptsView.swift in Sources */,
 				22A4B5BC2A70DD39003538BD /* MEMEfyApp.swift in Sources */,
 				22A4B6112A72FA17003538BD /* SearchGIFForm.swift in Sources */,

@@ -10,7 +10,6 @@ import FirebaseFirestoreSwift
 
 struct Prompt: Codable, Identifiable {
     @DocumentID var id: String?
-    var promptId: String
     var text: String
     var isCustom: Bool
 }
