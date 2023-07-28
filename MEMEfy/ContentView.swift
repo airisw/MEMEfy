@@ -11,11 +11,24 @@ struct ContentView: View {
     @StateObject var loginManager: LoginManager
     
     var body: some View {
-        VStack {
-            Text("MEMEfy")
-                .font(.title).bold()
-            LoginForm()
-                .environmentObject(loginManager)
+        GeometryReader { geo in
+            ZStack {
+                Image("Wallpaper")
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+
+                VStack {
+                    Text("MEMEfy")
+                        .font(.title).bold()
+                        .foregroundColor(Color("Purple"))
+                        .shadow(color:.white, radius: 10, x: 5, y: 5)
+
+                    LoginForm()
+                        .environmentObject(loginManager)
+                }
+            }
         }
     }
 }
