@@ -17,7 +17,7 @@ extension String {
 }
 
 class LoginManager: ObservableObject {
-    @Published private(set) var gameRooms: [GameRoom] = []
+    @Published fileprivate(set) var gameRooms: [GameRoom] = []
     
     let db = Firestore.firestore()
     
@@ -53,5 +53,19 @@ class LoginManager: ObservableObject {
         } catch let error {
             print("Error writing player to Firestore: \(error)")
         }
+    }
+}
+
+internal class MockLoginManager: LoginManager {
+    override func startGame(name: String, roomCode: String) {
+        let player = Player(name: "Ada", totalScore: 0)
+        let gameRoom = GameRoom(
+                                roomCode: roomCode,
+                                players: [player],
+                                rounds: [],
+                                gameStart: Date()
+                                )
+        
+        self.gameRooms.append(gameRoom)
     }
 }

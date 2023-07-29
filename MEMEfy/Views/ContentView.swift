@@ -23,7 +23,7 @@ struct ContentView: View {
                     Text("MEMEfy")
                         .font(.title).bold()
                         .foregroundColor(Color("Purple"))
-                        .shadow(color:.white, radius: 10, x: 5, y: 5)
+                        .shadow(color: .white, radius: 10, x: 5, y: 5)
 
                     LoginForm()
                         .environmentObject(loginManager)
@@ -35,6 +35,8 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(loginManager: LoginManager(gameRooms: []))
+//        ContentView(loginManager: LoginManager(gameRooms: []))
+        let manager = MockLoginManager(gameRooms: [])
+        ContentView(loginManager: manager)
     }
 }

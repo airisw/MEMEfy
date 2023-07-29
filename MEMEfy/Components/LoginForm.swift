@@ -26,6 +26,7 @@ struct LoginForm: View {
                 .autocapitalization(.none)
                 .padding()
                 .background(Color.white.opacity(0.3).cornerRadius(20))
+                .foregroundColor(.white)
             
             Button {
                 print("Form submitted with \(name) and \(roomCode)")

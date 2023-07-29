@@ -86,8 +86,8 @@
 				22A4B64C2A740D00003538BD /* Networking */,
 				22A4B6132A72FB76003538BD /* Models */,
 				22A4B6122A72FB4E003538BD /* Views */,
+				22A4B5D22A70F457003538BD /* Components */,
 				22A4B5BB2A70DD39003538BD /* MEMEfyApp.swift */,
-				22A4B5BD2A70DD39003538BD /* ContentView.swift */,
 				22A4B64A2A7408E8003538BD /* GoogleService-Info.plist */,
 				22A4B5BF2A70DD3B003538BD /* Assets.xcassets */,
 				22A4B5C12A70DD3B003538BD /* Preview Content */,
@@ -116,6 +116,7 @@
 		22A4B6122A72FB4E003538BD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				22A4B5BD2A70DD39003538BD /* ContentView.swift */,
 				22A4B6182A731465003538BD /* WaitingRoomView.swift */,
 				22A4B61A2A731481003538BD /* PersonalizePromptsView.swift */,
 				22A4B61C2A73149B003538BD /* RoundJudgeView.swift */,
@@ -123,7 +124,6 @@
 				22A4B6202A7314C1003538BD /* VotingPlayerView.swift */,
 				22A4B6222A7314CF003538BD /* VotingJudgeView.swift */,
 				22A4B6242A7314E2003538BD /* ResultView.swift */,
-				22A4B5D22A70F457003538BD /* Components */,
 			);
 			path = Views;
 			sourceTree = "<group>";
