@@ -9,7 +9,29 @@ import SwiftUI
 
 struct PersonalizePromptsView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GeometryReader { geo in
+            ZStack {
+                Image("Wallpaper")
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                
+                VStack {
+                    Text("<timer>")
+                        .font(.title)
+                        .padding(.vertical)
+                    
+                    VStack {
+                        Text("Submit your own prompts")
+                            .foregroundColor(.white)
+                            .shadow(color: .black, radius: 25, x: 5, y: 5)
+                        
+                        PromptForm()
+                    }
+                }
+            }
+        }
     }
 }
 
