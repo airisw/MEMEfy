@@ -9,6 +9,13 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+extension String {
+    static func generateRandomString(length: Int) -> String {
+        let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        return String((0..<length).map { _ in letters.randomElement()! })
+    }
+}
+
 class LoginManager: ObservableObject {
     @Published private(set) var gameRooms: [GameRoom] = []
     
@@ -25,8 +32,16 @@ class LoginManager: ObservableObject {
         let player = Player(name: name,
                             totalScore: 0)
         
+        var finalRoomCode = roomCode
+        
+        if finalRoomCode.isEmpty {
+            finalRoomCode = String.generateRandomString(length: 4)
+        } else {
+            finalRoomCode = roomCode.uppercased()
+        }
+        
         let gameRoom = GameRoom(
-            roomCode: roomCode,
+            roomCode: finalRoomCode,
             players: [player],
             rounds: [],
             gameStart: Date()
