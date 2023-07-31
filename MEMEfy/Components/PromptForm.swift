@@ -14,6 +14,7 @@ struct PromptForm: View {
     var body: some View {
         VStack {
             TextEditor(text: $prompt)
+                .disableAutocorrection(true)
                 .frame(height: 80)
                 .background(.opacity(0.5))
                 .cornerRadius(5)

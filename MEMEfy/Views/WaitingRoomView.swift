@@ -48,7 +48,7 @@ struct WaitingRoomView: View {
                                 .padding()
                         }
                         .navigationDestination(isPresented: $isStartGameTapped) {
-                            PersonalizePromptsView()
+                            PersonalizePromptsView(promptManager: PromptManager(prompts: []))
                                 .navigationBarBackButtonHidden(true)
                         }
                         .background(Color("Purple"))
