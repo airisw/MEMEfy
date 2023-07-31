@@ -8,45 +8,55 @@
 import SwiftUI
 
 struct WaitingRoomView: View {
+    @State private var isStartGameTapped = false
+    
     var body: some View {
-        GeometryReader { geo in
-            ZStack {
-                Image("Wallpaper")
-                    .resizable()
-                    .scaledToFill()
-                    .edgesIgnoringSafeArea(.all)
-                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-                
-                VStack {
-                    Text("<room code>")
-                        .font(.title)
-                        .padding(.vertical)
+        NavigationStack {
+            GeometryReader { geo in
+                ZStack {
+                    Image("Wallpaper")
+                        .resizable()
+                        .scaledToFill()
+                        .edgesIgnoringSafeArea(.all)
+                        .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                     
-                    VStack(alignment: .leading) {
-                        Text("Waiting for players...")
-                            .padding(.horizontal)
+                    VStack {
+                        Text("<room code>")
+                            .font(.title)
+                            .padding(.vertical)
                         
-                        VStack {
-                            Text("<player 1>")
-                            Text("<player 2>")
-                            Text("<player 3>")
-                            Text("<player 4>")
-                        }
-                        .padding()
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-
-                    
-                    Button {
-                        print("Start Game button tapped")
-                    } label: {
-                        Text("Start Game")
+                        VStack(alignment: .leading) {
+                            Text("Waiting for players...")
+                                .padding(.horizontal)
+                            
+                            VStack {
+                                Text("<player 1>")
+                                Text("<player 2>")
+                                Text("<player 3>")
+                                Text("<player 4>")
+                            }
                             .padding()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+
+                        
+                        Button {
+                            print("Start Game button tapped")
+                            isStartGameTapped = true
+                        } label: {
+                            Text("Start Game")
+                                .padding()
+                        }
+                        .navigationDestination(isPresented: $isStartGameTapped) {
+                            PersonalizePromptsView()
+                                .navigationBarBackButtonHidden(true)
+                        }
+                        .background(Color("Purple"))
+                        .foregroundColor(.white)
+                        .cornerRadius(30)
+                        .shadow(color: .white, radius: 10, x: 5, y: 5)
+                        
                     }
-                    .background(Color("Purple"))
-                    .foregroundColor(.white)
-                    .cornerRadius(30)
-                    .shadow(color: .white, radius: 10, x: 5, y: 5)
                 }
             }
         }

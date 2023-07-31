@@ -92,9 +92,9 @@
 				22A4B5D22A70F457003538BD /* Components */,
 				22A4B5BB2A70DD39003538BD /* MEMEfyApp.swift */,
 				22A4B64A2A7408E8003538BD /* GoogleService-Info.plist */,
+				2225A4CD2A75ACD600FC89C0 /* GIPHY-API-key.plist */,
 				22A4B5BF2A70DD3B003538BD /* Assets.xcassets */,
 				22A4B5C12A70DD3B003538BD /* Preview Content */,
-				2225A4CD2A75ACD600FC89C0 /* GIPHY-API-key.plist */,
 			);
 			path = MEMEfy;
 			sourceTree = "<group>";
