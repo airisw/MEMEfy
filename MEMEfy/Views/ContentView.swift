@@ -9,24 +9,30 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var loginManager: LoginManager
+    @State private var isJoinRoomTapped = false
     
     var body: some View {
-        GeometryReader { geo in
-            ZStack {
-                Image("Wallpaper")
-                    .resizable()
-                    .scaledToFill()
-                    .edgesIgnoringSafeArea(.all)
-                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+        NavigationStack {
+            GeometryReader { geo in
+                ZStack {
+                    Image("Wallpaper")
+                        .resizable()
+                        .scaledToFill()
+                        .edgesIgnoringSafeArea(.all)
+                        .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
 
-                VStack {
-                    Text("MEMEfy")
-                        .font(.title).bold()
-                        .foregroundColor(Color("Purple"))
-                        .shadow(color: .white, radius: 10, x: 5, y: 5)
+                    VStack {
+                        Text("MEMEfy")
+                            .font(.title).bold()
+                            .foregroundColor(Color("Purple"))
+                            .shadow(color: .white, radius: 10, x: 5, y: 5)
 
-                    LoginForm()
-                        .environmentObject(loginManager)
+                        LoginForm(isJoinRoomTapped: $isJoinRoomTapped)
+                            .environmentObject(loginManager)
+                            .navigationDestination(isPresented: $isJoinRoomTapped) { WaitingRoomView()
+                                    .navigationBarBackButtonHidden(true)
+                            }
+                    }
                 }
             }
         }
