@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct PersonalizePromptsView: View {
+    @StateObject var promptManager: PromptManager
+    
     var body: some View {
         GeometryReader { geo in
             ZStack {
@@ -28,6 +30,7 @@ struct PersonalizePromptsView: View {
                             .shadow(color: .black, radius: 25, x: 5, y: 5)
                         
                         PromptForm()
+                            .environmentObject(promptManager)
                     }
                 }
             }
@@ -37,6 +40,6 @@ struct PersonalizePromptsView: View {
 
 struct PersonalizePromptsView_Previews: PreviewProvider {
     static var previews: some View {
-        PersonalizePromptsView()
+        PersonalizePromptsView(promptManager: PromptManager(prompts: []))
     }
 }

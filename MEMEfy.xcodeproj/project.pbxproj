@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2225A4CE2A75ACD600FC89C0 /* GIPHY-API-key.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2225A4CD2A75ACD600FC89C0 /* GIPHY-API-key.plist */; };
 		2225A4D32A75B4DF00FC89C0 /* SearchForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2225A4D22A75B4DF00FC89C0 /* SearchForm.swift */; };
+		2225A4D52A785FBF00FC89C0 /* PromptManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2225A4D42A785FBF00FC89C0 /* PromptManager.swift */; };
 		22A4B5BC2A70DD39003538BD /* MEMEfyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A4B5BB2A70DD39003538BD /* MEMEfyApp.swift */; };
 		22A4B5BE2A70DD39003538BD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A4B5BD2A70DD39003538BD /* ContentView.swift */; };
 		22A4B5C02A70DD3B003538BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A4B5BF2A70DD3B003538BD /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 		2225A4CD2A75ACD600FC89C0 /* GIPHY-API-key.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GIPHY-API-key.plist"; sourceTree = "<group>"; };
 		2225A4CF2A75ADB100FC89C0 /* GIPHYManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIPHYManager.swift; sourceTree = "<group>"; };
 		2225A4D22A75B4DF00FC89C0 /* SearchForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchForm.swift; sourceTree = "<group>"; };
+		2225A4D42A785FBF00FC89C0 /* PromptManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptManager.swift; sourceTree = "<group>"; };
 		22A4B5B82A70DD39003538BD /* MEMEfy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MEMEfy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22A4B5BB2A70DD39003538BD /* MEMEfyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MEMEfyApp.swift; sourceTree = "<group>"; };
 		22A4B5BD2A70DD39003538BD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 			children = (
 				22A4B62E2A73F52F003538BD /* LoginManager.swift */,
 				2225A4CF2A75ADB100FC89C0 /* GIPHYManager.swift */,
+				2225A4D42A785FBF00FC89C0 /* PromptManager.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				2225A4D32A75B4DF00FC89C0 /* SearchForm.swift in Sources */,
 				22A4B6192A731465003538BD /* WaitingRoomView.swift in Sources */,
 				22A4B6172A7303D6003538BD /* PromptModel.swift in Sources */,
+				2225A4D52A785FBF00FC89C0 /* PromptManager.swift in Sources */,
 				22A4B5D42A70F51B003538BD /* LoginForm.swift in Sources */,
 				22A4B62F2A73F52F003538BD /* LoginManager.swift in Sources */,
 				22A4B61B2A731481003538BD /* PersonalizePromptsView.swift in Sources */,

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PromptForm: View {
+    @EnvironmentObject var promptManager: PromptManager
     @State private var prompt: String = ""
     
     var body: some View {
@@ -19,7 +20,9 @@ struct PromptForm: View {
                 .padding()
             
             Button {
-                print(prompt)
+                print("\(prompt) submitted")
+                promptManager.createPrompts(prompt: prompt)
+                prompt = ""
             } label: {
                 Text("Submit")
                     .padding()
@@ -44,6 +47,7 @@ struct PromptForm_Previews: PreviewProvider {
                     .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                 
                 PromptForm()
+                    .environmentObject(PromptManager(prompts: []))
             }
         }
     }
