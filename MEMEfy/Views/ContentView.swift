@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @StateObject var firebaseManager: FirebaseManager
     @State private var isJoinRoomTapped = false
+    @State private var finalRoomCode: String = ""
     
     var body: some View {
         NavigationStack {
@@ -27,9 +28,9 @@ struct ContentView: View {
                             .foregroundColor(Color("Purple"))
                             .shadow(color: .white, radius: 10, x: 5, y: 5)
 
-                        LoginForm(isJoinRoomTapped: $isJoinRoomTapped)
+                        LoginForm(isJoinRoomTapped: $isJoinRoomTapped, finalRoomCode: $finalRoomCode)
                             .environmentObject(firebaseManager)
-                            .navigationDestination(isPresented: $isJoinRoomTapped) { WaitingRoomView()
+                            .navigationDestination(isPresented: $isJoinRoomTapped) { WaitingRoomView(firebaseManager: FirebaseManager(gameRooms: []), finalRoomCode: finalRoomCode)
                                     .navigationBarBackButtonHidden(true)
                             }
                     }

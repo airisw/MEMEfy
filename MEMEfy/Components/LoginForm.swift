@@ -12,6 +12,7 @@ struct LoginForm: View {
     @State private var name = ""
     @State private var roomCode = ""
     @Binding var isJoinRoomTapped: Bool
+    @Binding var finalRoomCode: String
     
     var body: some View {
         VStack {
@@ -29,7 +30,7 @@ struct LoginForm: View {
             
             Button {
                 print("Form submitted with \(name) and \(roomCode)")
-                firebaseManager.startGame(name: name, roomCode: roomCode)
+                finalRoomCode = firebaseManager.startGame(name: name, roomCode: roomCode)
                 name = ""
                 roomCode = ""
                 isJoinRoomTapped = true
@@ -47,6 +48,7 @@ struct LoginForm: View {
 
 struct LoginForm_Previews: PreviewProvider {
     @State static var isJoinRoomTapped = false
+    @State static var finalRoomCode: String = ""
     
     static var previews: some View {
         GeometryReader { geo in
@@ -57,7 +59,7 @@ struct LoginForm_Previews: PreviewProvider {
                     .edgesIgnoringSafeArea(.all)
                     .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                 
-                LoginForm(isJoinRoomTapped: $isJoinRoomTapped)
+                LoginForm(isJoinRoomTapped: $isJoinRoomTapped, finalRoomCode: $finalRoomCode)
                     .environmentObject(FirebaseManager(gameRooms: []))
             }
         }

@@ -25,7 +25,7 @@ class FirebaseManager: ObservableObject {
         self.gameRooms = gameRooms
     }
     
-    func startGame(name: String, roomCode: String) {
+    func startGame(name: String, roomCode: String) -> String {
         let newPlayerRef = db.collection("player").document()
         let newGameRoomRef = db.collection("gameRoom").document()
         
@@ -51,13 +51,15 @@ class FirebaseManager: ObservableObject {
             try newPlayerRef.setData(from: player)
             try newGameRoomRef.setData(from: gameRoom)
         } catch let error {
-            print("Error writing player to Firestore: \(error)")
+            print("Error writing to Firestore: \(error)")
         }
+        
+        return finalRoomCode
     }
 }
 
 internal class MockFirebaseManager: FirebaseManager {
-    override func startGame(name: String, roomCode: String) {
+    override func startGame(name: String, roomCode: String) -> String {
         let player = Player(name: "Ada", totalScore: 0)
         let gameRoom = GameRoom(
                                 roomCode: roomCode,
@@ -67,5 +69,7 @@ internal class MockFirebaseManager: FirebaseManager {
                                 )
         
         self.gameRooms.append(gameRoom)
+        
+        return roomCode
     }
 }

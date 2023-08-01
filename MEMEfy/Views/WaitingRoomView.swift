@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct WaitingRoomView: View {
+    @StateObject var firebaseManager: FirebaseManager
     @State private var isStartGameTapped = false
+    var finalRoomCode: String
     
     var body: some View {
         NavigationStack {
@@ -21,7 +23,7 @@ struct WaitingRoomView: View {
                         .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                     
                     VStack {
-                        Text("<room code>")
+                        Text(finalRoomCode)
                             .font(.title)
                             .padding(.vertical)
                         
@@ -64,7 +66,9 @@ struct WaitingRoomView: View {
 }
 
 struct WaitingRoomView_Previews: PreviewProvider {
+    @State static var finalRoomCode = "<room code>"
+    
     static var previews: some View {
-        WaitingRoomView()
+        WaitingRoomView(firebaseManager: FirebaseManager(gameRooms: []), finalRoomCode: finalRoomCode)
     }
 }
