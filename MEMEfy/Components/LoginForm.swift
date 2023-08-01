@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginForm: View {
-    @EnvironmentObject var loginManager: LoginManager
+    @EnvironmentObject var firebaseManager: FirebaseManager
     @State private var name = ""
     @State private var roomCode = ""
     @Binding var isJoinRoomTapped: Bool
@@ -29,7 +29,7 @@ struct LoginForm: View {
             
             Button {
                 print("Form submitted with \(name) and \(roomCode)")
-                loginManager.startGame(name: name, roomCode: roomCode)
+                firebaseManager.startGame(name: name, roomCode: roomCode)
                 name = ""
                 roomCode = ""
                 isJoinRoomTapped = true
@@ -58,7 +58,7 @@ struct LoginForm_Previews: PreviewProvider {
                     .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                 
                 LoginForm(isJoinRoomTapped: $isJoinRoomTapped)
-                    .environmentObject(LoginManager(gameRooms: []))
+                    .environmentObject(FirebaseManager(gameRooms: []))
             }
         }
     }

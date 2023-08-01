@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var loginManager: LoginManager
+    @StateObject var firebaseManager: FirebaseManager
     @State private var isJoinRoomTapped = false
     
     var body: some View {
@@ -28,7 +28,7 @@ struct ContentView: View {
                             .shadow(color: .white, radius: 10, x: 5, y: 5)
 
                         LoginForm(isJoinRoomTapped: $isJoinRoomTapped)
-                            .environmentObject(loginManager)
+                            .environmentObject(firebaseManager)
                             .navigationDestination(isPresented: $isJoinRoomTapped) { WaitingRoomView()
                                     .navigationBarBackButtonHidden(true)
                             }
@@ -41,8 +41,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-//        ContentView(loginManager: LoginManager(gameRooms: []))
-        let manager = MockLoginManager(gameRooms: [])
-        ContentView(loginManager: manager)
+        let manager = MockFirebaseManager(gameRooms: [])
+        ContentView(firebaseManager: manager)
     }
 }

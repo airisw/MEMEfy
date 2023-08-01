@@ -16,7 +16,7 @@ extension String {
     }
 }
 
-class LoginManager: ObservableObject {
+class FirebaseManager: ObservableObject {
     @Published fileprivate(set) var gameRooms: [GameRoom] = []
     
     let db = Firestore.firestore()
@@ -56,7 +56,7 @@ class LoginManager: ObservableObject {
     }
 }
 
-internal class MockLoginManager: LoginManager {
+internal class MockFirebaseManager: FirebaseManager {
     override func startGame(name: String, roomCode: String) {
         let player = Player(name: "Ada", totalScore: 0)
         let gameRoom = GameRoom(

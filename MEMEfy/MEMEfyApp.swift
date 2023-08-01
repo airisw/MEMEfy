@@ -16,7 +16,7 @@ struct MEMEfyApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(loginManager: LoginManager(gameRooms: []))
+            ContentView(firebaseManager: FirebaseManager(gameRooms: []))
         }
     }
 }
