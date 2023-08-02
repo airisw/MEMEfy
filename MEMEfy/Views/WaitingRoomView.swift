@@ -31,20 +31,23 @@ struct WaitingRoomView: View {
                             Text("Waiting for players...")
                                 .padding(.horizontal)
                             
+                            
                             VStack {
                                 Text("<player 1>")
                                 Text("<player 2>")
                                 Text("<player 3>")
                                 Text("<player 4>")
+
                             }
                             .padding()
                             .frame(maxWidth: .infinity, alignment: .leading)
                         }
-
                         
                         Button {
                             print("Start Game button tapped")
                             isStartGameTapped = true
+                            firebaseManager.updateTimestamp(roomCode: finalRoomCode)
+                            print("timestamp updated")
                         } label: {
                             Text("Start Game")
                                 .padding()
