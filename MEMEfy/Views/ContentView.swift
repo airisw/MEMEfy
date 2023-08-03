@@ -30,7 +30,7 @@ struct ContentView: View {
 
                         LoginForm(isJoinRoomTapped: $isJoinRoomTapped, finalRoomCode: $finalRoomCode)
                             .environmentObject(firebaseManager)
-                            .navigationDestination(isPresented: $isJoinRoomTapped) { WaitingRoomView(firebaseManager: FirebaseManager(gameRooms: []), finalRoomCode: finalRoomCode)
+                            .navigationDestination(isPresented: $isJoinRoomTapped) { WaitingRoomView(finalRoomCode: finalRoomCode).environmentObject(firebaseManager)
                                     .navigationBarBackButtonHidden(true)
                             }
                     }

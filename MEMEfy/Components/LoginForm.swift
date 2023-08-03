@@ -33,6 +33,7 @@ struct LoginForm: View {
                 finalRoomCode = firebaseManager.startGame(name: name, roomCode: roomCode)
                 name = ""
                 roomCode = ""
+                firebaseManager.getPlayersCollection(roomCode: finalRoomCode)
                 isJoinRoomTapped = true
             } label: {
                 Text("Join Room")

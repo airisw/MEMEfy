@@ -18,7 +18,7 @@ extension String {
 
 class FirebaseManager: ObservableObject {
     @Published fileprivate(set) var gameRooms: [GameRoom] = []
-//    @Published fileprivate(set) var players: [Player] = []
+    @Published fileprivate(set) var players = [String]()
     
     let db = Firestore.firestore()
     
@@ -28,8 +28,8 @@ class FirebaseManager: ObservableObject {
     
     func startGame(name: String, roomCode: String) -> String {
         
-        let player = Player(name: name,
-                            totalScore: 0)
+//        let player = Player(name: name,
+//                            totalScore: 0)
         
         var finalRoomCode = roomCode
         
@@ -39,27 +39,82 @@ class FirebaseManager: ObservableObject {
             finalRoomCode = roomCode.uppercased()
         }
         
-        let newPlayerRef = db.collection("player").document()
+//        let newPlayerRef = db.collection("player").document()
         let newGameRoomRef = db.collection("gameRoom").document(finalRoomCode)
         
         let gameRoom = GameRoom(
             roomCode: finalRoomCode,
-            players: [player],
+//            players: [player],
             rounds: [],
             gameStart: Date()
         )
         
         do {
-            try newPlayerRef.setData(from: player)
+//            try newPlayerRef.setData(from: player)
             try newGameRoomRef.setData(from: gameRoom)
         } catch let error {
             print("Error writing to Firestore: \(error)")
         }
         
+        addPlayers(name: name, roomCode: finalRoomCode)
+        
         return finalRoomCode
     }
     
-//    func get players
+//    add players as sub collection to gameRoom
+    func addPlayers(name:String, roomCode: String) {
+        let newPlayerRef = db.collection("gameRoom").document(roomCode).collection("players").document(name)
+    
+        let newPlayer = Player(name: name, totalScore: 0)
+        
+        do {
+            try newPlayerRef.setData(from: newPlayer)
+        } catch {
+            print("Error writing player")
+        }
+    }
+    
+//    real time updates of players collection
+    func getPlayersCollection(roomCode: String) {
+        db.collection("gameRoom/\(roomCode)/players").addSnapshotListener { querySnapshot, error in
+            guard let documents = querySnapshot?.documents else {
+                print("Error fetching documents: \(error!)")
+                return
+            }
+                
+            let names = documents.map { $0["name"] as! String }.sorted()
+            print("Current players: \(names)")
+            
+            self.players = names
+
+        }
+    }
+     
+//    real time updates of players field
+//        func getPlayers(roomCode: String) {
+////            let gameRoomRef = db.collection("gameRoom").document(roomCode).collection("players")
+//            let gameRoomRef = db.collection("gameRoom").document(roomCode)
+//
+//            gameRoomRef.addSnapshotListener { querySnapshot, error in
+//                guard let document = querySnapshot else {
+//                    print("Error fetching documents: \(error!)")
+//                    return
+//                }
+//
+//                guard let data = document.data() else {
+//                    print("Document was empty")
+//                    return
+//                }
+//
+//                print(data)
+//
+////                if let players = data["players"] as? Dictionary<String, Any> {
+////                    print(players)
+////                    let name = players["name"]
+////                    print(name)
+////                }
+//            }
+//        }
     
     func updateTimestamp(roomCode: String) {
         db.collection("gameRoom").document(roomCode).setData(["gameStart": Date()], merge: true)
@@ -68,8 +123,6 @@ class FirebaseManager: ObservableObject {
     func getTimestamp(roomCode: String) {
         db.collection("gameRoom").document(roomCode).getDocument { (document, error) in
             if let document = document, document.exists {
-//                let timestamp = document.data()?["gameStart"] as? Timestamp
-//                print(timestamp)
                 if let timestamp = document.data()?["gameStart"] as? Timestamp {
                     let date = timestamp.dateValue()
                     print(date)
@@ -89,10 +142,9 @@ class FirebaseManager: ObservableObject {
 
 internal class MockFirebaseManager: FirebaseManager {
     override func startGame(name: String, roomCode: String) -> String {
-        let player = Player(name: "Ada", totalScore: 0)
+//        let player = Player(name: "Ada", totalScore: 0)
         let gameRoom = GameRoom(
                                 roomCode: roomCode,
-                                players: [player],
                                 rounds: [],
                                 gameStart: Date()
                                 )
