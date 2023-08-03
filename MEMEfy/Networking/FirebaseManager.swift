@@ -59,64 +59,28 @@ class FirebaseManager: ObservableObject {
         return finalRoomCode
     }
     
-//    func getPlayers(roomCode: String) {
-//        let gameRoomRef = db.collection("gameRoom").whereField("roomCode", isEqualTo: roomCode)
-//
-//        gameRoomRef.addSnapshotListener { snapshot, error in
-//
-//            if error == nil {
-//
-//                if let snapshot = snapshot {
-//
-//                    DispatchQueue.main.async {
-//
-//                        self.players = snapshot.documents.map { d in
-//
-//                            return Player(id: d.documentID,
-//                                          name: d["name"] as? String ?? "",
-//                                          totalScore: d["totalScore"] as? Int ?? 0)
-//                        }
-//                    }
-//                }
-//            } else {
-//
-//            }
-//        }
-//    }
-    
-//    func getPlayers(roomCode: String) {
-//        if roomCode == "" {
-//            print("roomCode is empty")
-//            return
-//        }
-//
-//        let gameRoomRef = db.collection("gameRoom/\(roomCode)/player")
-//
-//        gameRoomRef.addSnapshotListener { querySnapshot, error in
-//            guard let documents = querySnapshot?.documents else {
-//                print("Error fetching documents: \(error!)")
-//                return
-//            }
-//
-//            var playersLoaded = [Player]()
-//
-//            for document in documents {
-//                playersLoaded.append(Player(id: document.documentID,
-//                                            name: document.data()["name"] as! String,
-//                                            totalScore: document.data()["totalScore"] as! Int))
-//            }
-//
-//            self.players = playersLoaded
-//        }
-//    }
+//    func get players
     
     func updateTimestamp(roomCode: String) {
         db.collection("gameRoom").document(roomCode).setData(["gameStart": Date()], merge: true)
     }
     
-//    func get timestamp
+    func getTimestamp(roomCode: String) {
+        db.collection("gameRoom").document(roomCode).getDocument { (document, error) in
+            if let document = document, document.exists {
+//                let timestamp = document.data()?["gameStart"] as? Timestamp
+//                print(timestamp)
+                if let timestamp = document.data()?["gameStart"] as? Timestamp {
+                    let date = timestamp.dateValue()
+                    print(date)
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
     
-//    func get prompt
+//    func get random prompt
     
 //    func get submissions
     
