@@ -11,6 +11,8 @@ import FirebaseFirestoreSwift
 
 class PromptManager: ObservableObject {
     @Published fileprivate(set) var prompts: [Prompt] = []
+    @Published fileprivate(set) var promptsID = [String]()
+    @Published fileprivate(set) var currentPrompt = ""
     
     let db = Firestore.firestore()
     
@@ -20,14 +22,47 @@ class PromptManager: ObservableObject {
     
     func createPrompts(prompt: String) {
         let newPromptRef = db.collection("prompt").document()
-
+        
         let newPrompt = Prompt(text: prompt,
-                            isCustom: true)
-
+                               isCustom: true)
+        
         do {
             try newPromptRef.setData(from: newPrompt)
         } catch let error {
             print("Error adding prompt to Firestore: \(error)")
+        }
+    }
+    
+    func getPromptsID(completion: @escaping () -> Void) {
+        db.collection("prompt").getDocuments() { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in querySnapshot!.documents{
+                    self.promptsID.append(document.documentID)
+                }
+            }
+            self.promptsID.shuffle()
+            print(self.promptsID)
+            print(self.promptsID[0])
+            completion()
+        }
+    }
+    
+    func getRandomPrompt() {
+        getPromptsID {
+            let promptID = self.promptsID[0]
+            
+            self.db.collection("prompt").document(promptID).getDocument { (document, error) in
+                if let document = document, document.exists {
+                    if let prompt = document.data()?["text"] as? String {
+                        self.currentPrompt = prompt
+                        print(prompt)
+                    }
+                } else {
+                    print("Document does not exist")
+                }
+            }
         }
     }
 }

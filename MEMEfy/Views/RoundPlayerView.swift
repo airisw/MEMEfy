@@ -8,8 +8,28 @@
 import SwiftUI
 
 struct RoundPlayerView: View {
+    @EnvironmentObject var promptManager: PromptManager
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GeometryReader { geo in
+            ZStack {
+                Image("Wallpaper")
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                
+                VStack {
+                    Text("<timer>")
+                        .font(.title)
+                        .padding(.vertical)
+                    
+                    Text(promptManager.currentPrompt)
+                    
+                    SearchForm()
+                }
+            }
+        }
     }
 }
 
