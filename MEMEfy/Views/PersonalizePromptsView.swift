@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct PersonalizePromptsView: View {
+    @EnvironmentObject var firebaseManager: FirebaseManager
     @StateObject var promptManager: PromptManager
-    @State private var isBeginRoundTapped = false
+    @State private var countdownFinished = false
     
     var body: some View {
         GeometryReader { geo in
@@ -21,9 +22,14 @@ struct PersonalizePromptsView: View {
                     .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                 
                 VStack {
-                    Text("<timer>")
-                        .font(.title)
-                        .padding(.vertical)
+                    CountdownTimer(countdownFinished: $countdownFinished)
+                        .environmentObject(firebaseManager)
+                        .padding()
+                        .navigationDestination(isPresented: $countdownFinished) {
+                            RoundPlayerView()
+                                .environmentObject(promptManager)
+                                .navigationBarBackButtonHidden(true)
+                        }
                     
                     VStack {
                         Text("Submit your own prompts")
@@ -33,24 +39,6 @@ struct PersonalizePromptsView: View {
                         PromptForm()
                             .environmentObject(promptManager)
                     }
-                    
-                    Button {
-                        print("Begin Round button tapped")
-                        promptManager.getRandomPrompt()
-                        isBeginRoundTapped = true
-                    } label: {
-                        Text("Begin Round")
-                            .padding()
-                    }
-                    .navigationDestination(isPresented: $isBeginRoundTapped) {
-                        RoundPlayerView()
-                            .environmentObject(promptManager)
-                            .navigationBarBackButtonHidden(true)
-                    }
-                    .background(Color("Purple"))
-                    .foregroundColor(.white)
-                    .cornerRadius(30)
-                    .shadow(color: .white, radius: 10, x: 5, y: 5)
                 }
             }
         }
@@ -60,5 +48,6 @@ struct PersonalizePromptsView: View {
 struct PersonalizePromptsView_Previews: PreviewProvider {
     static var previews: some View {
         PersonalizePromptsView(promptManager: PromptManager(prompts: []))
+            .environmentObject(FirebaseManager(gameRooms: []))
     }
 }

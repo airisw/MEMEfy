@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Giphy/giphy-ios-sdk",
       "state" : {
-        "revision" : "8d71e9b17fa99905da0fc5545923577153f3288a",
-        "version" : "2.1.3"
+        "revision" : "ba4a17d60352bc8bfaeed2a9cd39990295408fd8",
+        "version" : "2.2.6"
       }
     },
     {

@@ -13,8 +13,9 @@
 		2225A4DA2A787B9700FC89C0 /* VotingForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2225A4D92A787B9700FC89C0 /* VotingForm.swift */; };
 		2225A4DC2A787C4C00FC89C0 /* RoundResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2225A4DB2A787C4C00FC89C0 /* RoundResults.swift */; };
 		2225A4DE2A787C6000FC89C0 /* Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2225A4DD2A787C6000FC89C0 /* Scoreboard.swift */; };
-		2225A5162A7AA76800FC89C0 /* GiphyUISDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2225A5152A7AA76800FC89C0 /* GiphyUISDK */; };
-		2225A51B2A7C3D5A00FC89C0 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2225A51A2A7C3D5A00FC89C0 /* Timer.swift */; };
+		2225A51E2A7C93BD00FC89C0 /* GiphyUISDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2225A51D2A7C93BD00FC89C0 /* GiphyUISDK */; };
+		2225A5202A7D362200FC89C0 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2225A51F2A7D362200FC89C0 /* TimerManager.swift */; };
+		2225A5242A7F296A00FC89C0 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2225A5232A7F296A00FC89C0 /* CountdownTimer.swift */; };
 		22A4B5BC2A70DD39003538BD /* MEMEfyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A4B5BB2A70DD39003538BD /* MEMEfyApp.swift */; };
 		22A4B5BE2A70DD39003538BD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A4B5BD2A70DD39003538BD /* ContentView.swift */; };
 		22A4B5C02A70DD3B003538BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A4B5BF2A70DD3B003538BD /* Assets.xcassets */; };
@@ -44,7 +45,8 @@
 		2225A4D92A787B9700FC89C0 /* VotingForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingForm.swift; sourceTree = "<group>"; };
 		2225A4DB2A787C4C00FC89C0 /* RoundResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundResults.swift; sourceTree = "<group>"; };
 		2225A4DD2A787C6000FC89C0 /* Scoreboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scoreboard.swift; sourceTree = "<group>"; };
-		2225A51A2A7C3D5A00FC89C0 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		2225A51F2A7D362200FC89C0 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
+		2225A5232A7F296A00FC89C0 /* CountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimer.swift; sourceTree = "<group>"; };
 		22A4B5B82A70DD39003538BD /* MEMEfy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MEMEfy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22A4B5BB2A70DD39003538BD /* MEMEfyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MEMEfyApp.swift; sourceTree = "<group>"; };
 		22A4B5BD2A70DD39003538BD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,7 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2225A5162A7AA76800FC89C0 /* GiphyUISDK in Frameworks */,
+				2225A51E2A7C93BD00FC89C0 /* GiphyUISDK in Frameworks */,
 				22A4B6282A731B9C003538BD /* FirebaseFirestore in Frameworks */,
 				22A4B62A2A731B9C003538BD /* FirebaseFirestoreSwift in Frameworks */,
 			);
@@ -128,7 +130,7 @@
 				2225A4D92A787B9700FC89C0 /* VotingForm.swift */,
 				2225A4DB2A787C4C00FC89C0 /* RoundResults.swift */,
 				2225A4DD2A787C6000FC89C0 /* Scoreboard.swift */,
-				2225A51A2A7C3D5A00FC89C0 /* Timer.swift */,
+				2225A5232A7F296A00FC89C0 /* CountdownTimer.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -163,6 +165,7 @@
 				22A4B62E2A73F52F003538BD /* FirebaseManager.swift */,
 				2225A4CF2A75ADB100FC89C0 /* GIPHYManager.swift */,
 				2225A4D42A785FBF00FC89C0 /* PromptManager.swift */,
+				2225A51F2A7D362200FC89C0 /* TimerManager.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -186,7 +189,7 @@
 			packageProductDependencies = (
 				22A4B6272A731B9C003538BD /* FirebaseFirestore */,
 				22A4B6292A731B9C003538BD /* FirebaseFirestoreSwift */,
-				2225A5152A7AA76800FC89C0 /* GiphyUISDK */,
+				2225A51D2A7C93BD00FC89C0 /* GiphyUISDK */,
 			);
 			productName = MEMEfy;
 			productReference = 22A4B5B82A70DD39003538BD /* MEMEfy.app */;
@@ -218,7 +221,7 @@
 			mainGroup = 22A4B5AF2A70DD39003538BD;
 			packageReferences = (
 				22A4B6262A731B9C003538BD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				2225A5142A7AA76800FC89C0 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */,
+				2225A51C2A7C93BD00FC89C0 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */,
 			);
 			productRefGroup = 22A4B5B92A70DD39003538BD /* Products */;
 			projectDirPath = "";
@@ -251,7 +254,6 @@
 				22A4B5BE2A70DD39003538BD /* ContentView.swift in Sources */,
 				22A4B60F2A72F640003538BD /* PromptForm.swift in Sources */,
 				22A4B61F2A7314AC003538BD /* RoundPlayerView.swift in Sources */,
-				2225A51B2A7C3D5A00FC89C0 /* Timer.swift in Sources */,
 				22A4B6152A72FBDD003538BD /* GameRoomModel.swift in Sources */,
 				22A4B6232A7314CF003538BD /* VotingJudgeView.swift in Sources */,
 				22A4B6252A7314E2003538BD /* ResultView.swift in Sources */,
@@ -259,7 +261,9 @@
 				22A4B61D2A73149B003538BD /* RoundJudgeView.swift in Sources */,
 				2225A4D32A75B4DF00FC89C0 /* SearchForm.swift in Sources */,
 				22A4B6192A731465003538BD /* WaitingRoomView.swift in Sources */,
+				2225A5242A7F296A00FC89C0 /* CountdownTimer.swift in Sources */,
 				2225A4DA2A787B9700FC89C0 /* VotingForm.swift in Sources */,
+				2225A5202A7D362200FC89C0 /* TimerManager.swift in Sources */,
 				22A4B6172A7303D6003538BD /* PromptModel.swift in Sources */,
 				2225A4D52A785FBF00FC89C0 /* PromptManager.swift in Sources */,
 				22A4B5D42A70F51B003538BD /* LoginForm.swift in Sources */,
@@ -470,12 +474,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2225A5142A7AA76800FC89C0 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */ = {
+		2225A51C2A7C93BD00FC89C0 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Giphy/giphy-ios-sdk";
 			requirement = {
 				kind = exactVersion;
-				version = 2.1.3;
+				version = 2.2.6;
 			};
 		};
 		22A4B6262A731B9C003538BD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
@@ -489,9 +493,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2225A5152A7AA76800FC89C0 /* GiphyUISDK */ = {
+		2225A51D2A7C93BD00FC89C0 /* GiphyUISDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2225A5142A7AA76800FC89C0 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */;
+			package = 2225A51C2A7C93BD00FC89C0 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */;
 			productName = GiphyUISDK;
 		};
 		22A4B6272A731B9C003538BD /* FirebaseFirestore */ = {

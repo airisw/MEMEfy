@@ -19,6 +19,10 @@ extension String {
 class FirebaseManager: ObservableObject {
     @Published fileprivate(set) var gameRooms: [GameRoom] = []
     @Published fileprivate(set) var players = [String]()
+    @Published fileprivate(set) var timestamp = Date()
+    @Published fileprivate(set) var modifiedDate = Date()
+//    @Published fileprivate(set) var playersID = [String]()
+//    @Published fileprivate(set) var currentJudgeID = ""
     
     let db = Firestore.firestore()
     
@@ -27,10 +31,6 @@ class FirebaseManager: ObservableObject {
     }
     
     func startGame(name: String, roomCode: String) -> String {
-        
-//        let player = Player(name: name,
-//                            totalScore: 0)
-        
         var finalRoomCode = roomCode
         
         if finalRoomCode.isEmpty {
@@ -39,24 +39,23 @@ class FirebaseManager: ObservableObject {
             finalRoomCode = roomCode.uppercased()
         }
         
-//        let newPlayerRef = db.collection("player").document()
         let newGameRoomRef = db.collection("gameRoom").document(finalRoomCode)
         
         let gameRoom = GameRoom(
             roomCode: finalRoomCode,
 //            players: [player],
-            rounds: [],
+//            rounds: [],
             gameStart: Date()
         )
         
         do {
-//            try newPlayerRef.setData(from: player)
             try newGameRoomRef.setData(from: gameRoom)
         } catch let error {
             print("Error writing to Firestore: \(error)")
         }
         
         addPlayers(name: name, roomCode: finalRoomCode)
+        addRound(roomCode: finalRoomCode)
         
         return finalRoomCode
     }
@@ -71,6 +70,22 @@ class FirebaseManager: ObservableObject {
             try newPlayerRef.setData(from: newPlayer)
         } catch {
             print("Error writing player")
+        }
+    }
+    
+    func addRound(roomCode: String) {
+        let newRoundRef = db.collection("gameRoom").document(roomCode).collection("rounds").document()
+        
+        let newRound = Round(judgeId: "",
+                             winnerId: "",
+                             promptId: "",
+                             submissions: [],
+                             roundStart: Date())
+        
+        do {
+            try newRoundRef.setData(from: newRound)
+        } catch {
+            print("Error writing round")
         }
     }
     
@@ -125,7 +140,14 @@ class FirebaseManager: ObservableObject {
             if let document = document, document.exists {
                 if let timestamp = document.data()?["gameStart"] as? Timestamp {
                     let date = timestamp.dateValue()
-                    print(date)
+                    self.timestamp = date
+                    print("timestamp from Firebase: \(self.timestamp)")
+                    
+                    let calendar = Calendar.current
+                    if let modifiedDate = calendar.date(byAdding: .second, value: 100, to: self.timestamp) {
+                        self.modifiedDate = modifiedDate
+                        print("added 100 secs: \(self.modifiedDate)")
+                    }
                 }
             } else {
                 print("Document does not exist")
@@ -133,7 +155,29 @@ class FirebaseManager: ObservableObject {
         }
     }
     
-//    func get random prompt
+//    CHOOSE JUDGE
+//    func chooseJudge(roomCode: String, completion: @escaping () -> Void) {
+//        db.collection("gameRoom/\(roomCode)/players").getDocuments() { (querySnapshot, error) in
+//            if let error = error {
+//                print("Error getting documents: \(error)")
+//            } else {
+//                for document in querySnapshot!.documents{
+//                    self.playersID.append(document.documentID)
+//                }
+//            }
+//            self.playersID.shuffle()
+//            self.currentJudgeID = self.playersID[0]
+//            completion()
+//        }
+//    }
+    
+//    func updateJudgeID(roomCode: String) {
+//        chooseJudge(roomCode: roomCode) {
+//            let judgeID = self.currentJudgeID
+//
+//            self.db.collection("gameRoom/\(roomCode)/rounds").order(by: "roundStart", descending: true).limit(to: 1)
+//        }
+//    }
     
 //    func get submissions
     
@@ -145,7 +189,7 @@ internal class MockFirebaseManager: FirebaseManager {
 //        let player = Player(name: "Ada", totalScore: 0)
         let gameRoom = GameRoom(
                                 roomCode: roomCode,
-                                rounds: [],
+//                                rounds: [],
                                 gameStart: Date()
                                 )
         

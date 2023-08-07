@@ -43,12 +43,14 @@ struct WaitingRoomView: View {
                             isStartGameTapped = true
                             firebaseManager.updateTimestamp(roomCode: finalRoomCode)
                             print("timestamp updated")
+                            firebaseManager.getTimestamp(roomCode: finalRoomCode)
                         } label: {
                             Text("Start Game")
                                 .padding()
                         }
                         .navigationDestination(isPresented: $isStartGameTapped) {
                             PersonalizePromptsView(promptManager: PromptManager(prompts: []))
+                                .environmentObject(firebaseManager)
                                 .navigationBarBackButtonHidden(true)
                         }
                         .background(Color("Purple"))
@@ -69,5 +71,6 @@ struct WaitingRoomView_Previews: PreviewProvider {
     static var previews: some View {
 //        WaitingRoomView(firebaseManager: FirebaseManager(gameRooms: []), finalRoomCode: finalRoomCode)
         WaitingRoomView(finalRoomCode: finalRoomCode)
+            .environmentObject(FirebaseManager(gameRooms: []))
     }
 }
