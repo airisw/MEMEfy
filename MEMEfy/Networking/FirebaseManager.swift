@@ -21,8 +21,9 @@ class FirebaseManager: ObservableObject {
     @Published fileprivate(set) var players = [String]()
     @Published fileprivate(set) var timestamp = Date()
     @Published fileprivate(set) var modifiedDate = Date()
-//    @Published fileprivate(set) var playersID = [String]()
-//    @Published fileprivate(set) var currentJudgeID = ""
+    @Published fileprivate(set) var playersID = [String]()
+    @Published fileprivate(set) var currentJudgeID = ""
+    @Published fileprivate(set) var roundDocumentID = ""
     
     let db = Firestore.firestore()
     
@@ -155,33 +156,51 @@ class FirebaseManager: ObservableObject {
         }
     }
     
-//    CHOOSE JUDGE
-//    func chooseJudge(roomCode: String, completion: @escaping () -> Void) {
-//        db.collection("gameRoom/\(roomCode)/players").getDocuments() { (querySnapshot, error) in
-//            if let error = error {
-//                print("Error getting documents: \(error)")
-//            } else {
-//                for document in querySnapshot!.documents{
-//                    self.playersID.append(document.documentID)
-//                }
-//            }
-//            self.playersID.shuffle()
-//            self.currentJudgeID = self.playersID[0]
-//            completion()
-//        }
-//    }
+    func getJudgeID(roomCode: String, completion: @escaping () -> Void) {
+        db.collection("gameRoom/\(roomCode)/players").getDocuments() { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting players documents: \(error)")
+            } else {
+                for document in querySnapshot!.documents {
+                    self.playersID.append(document.documentID)
+                }
+            }
+            self.playersID.shuffle()
+            self.currentJudgeID = self.playersID[0]
+            print(self.playersID[0])
+            completion()
+        }
+    }
     
-//    func updateJudgeID(roomCode: String) {
-//        chooseJudge(roomCode: roomCode) {
-//            let judgeID = self.currentJudgeID
-//
-//            self.db.collection("gameRoom/\(roomCode)/rounds").order(by: "roundStart", descending: true).limit(to: 1)
-//        }
-//    }
+    func updateJudgeID(roomCode: String) {
+        getJudgeID(roomCode: roomCode) {
+            let judgeID = self.currentJudgeID
+            
+            self.db.collection("gameRoom/\(roomCode)/rounds")
+                .order(by: "roundStart", descending: true).limit(to: 1).getDocuments() { (querySnapshot, error) in
+                    if let error = error {
+                        print("Error fetching round document: \(error)")
+                    } else {
+                        for document in querySnapshot!.documents {
+                            let roundRef = document.reference
+                            
+                            roundRef.setData(["judgeId": judgeID], merge:true)
+                        }
+                    }
+                }
+        }
+    }
     
 //    func get submissions
     
 //    func delete gameRoom
+    func deleteGameRoom(roomCode: String) {
+        db.collection("gameRoom").document(roomCode).delete() { error in
+            if let error = error {
+                print("Error deleting gameRoom: \(error)")
+            }
+        }
+    }
 }
 
 internal class MockFirebaseManager: FirebaseManager {

@@ -14,7 +14,6 @@
 		2225A4DC2A787C4C00FC89C0 /* RoundResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2225A4DB2A787C4C00FC89C0 /* RoundResults.swift */; };
 		2225A4DE2A787C6000FC89C0 /* Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2225A4DD2A787C6000FC89C0 /* Scoreboard.swift */; };
 		2225A51E2A7C93BD00FC89C0 /* GiphyUISDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2225A51D2A7C93BD00FC89C0 /* GiphyUISDK */; };
-		2225A5202A7D362200FC89C0 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2225A51F2A7D362200FC89C0 /* TimerManager.swift */; };
 		2225A5242A7F296A00FC89C0 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2225A5232A7F296A00FC89C0 /* CountdownTimer.swift */; };
 		22A4B5BC2A70DD39003538BD /* MEMEfyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A4B5BB2A70DD39003538BD /* MEMEfyApp.swift */; };
 		22A4B5BE2A70DD39003538BD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A4B5BD2A70DD39003538BD /* ContentView.swift */; };
@@ -45,7 +44,6 @@
 		2225A4D92A787B9700FC89C0 /* VotingForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingForm.swift; sourceTree = "<group>"; };
 		2225A4DB2A787C4C00FC89C0 /* RoundResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundResults.swift; sourceTree = "<group>"; };
 		2225A4DD2A787C6000FC89C0 /* Scoreboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scoreboard.swift; sourceTree = "<group>"; };
-		2225A51F2A7D362200FC89C0 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		2225A5232A7F296A00FC89C0 /* CountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimer.swift; sourceTree = "<group>"; };
 		22A4B5B82A70DD39003538BD /* MEMEfy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MEMEfy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22A4B5BB2A70DD39003538BD /* MEMEfyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MEMEfyApp.swift; sourceTree = "<group>"; };
@@ -165,7 +163,6 @@
 				22A4B62E2A73F52F003538BD /* FirebaseManager.swift */,
 				2225A4CF2A75ADB100FC89C0 /* GIPHYManager.swift */,
 				2225A4D42A785FBF00FC89C0 /* PromptManager.swift */,
-				2225A51F2A7D362200FC89C0 /* TimerManager.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -263,7 +260,6 @@
 				22A4B6192A731465003538BD /* WaitingRoomView.swift in Sources */,
 				2225A5242A7F296A00FC89C0 /* CountdownTimer.swift in Sources */,
 				2225A4DA2A787B9700FC89C0 /* VotingForm.swift in Sources */,
-				2225A5202A7D362200FC89C0 /* TimerManager.swift in Sources */,
 				22A4B6172A7303D6003538BD /* PromptModel.swift in Sources */,
 				2225A4D52A785FBF00FC89C0 /* PromptManager.swift in Sources */,
 				22A4B5D42A70F51B003538BD /* LoginForm.swift in Sources */,

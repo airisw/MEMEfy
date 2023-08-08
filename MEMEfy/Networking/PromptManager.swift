@@ -13,6 +13,7 @@ class PromptManager: ObservableObject {
     @Published fileprivate(set) var prompts: [Prompt] = []
     @Published fileprivate(set) var promptsID = [String]()
     @Published fileprivate(set) var currentPrompt = ""
+    @Published fileprivate(set) var currentPromptID = ""
     
     let db = Firestore.firestore()
     
@@ -43,8 +44,9 @@ class PromptManager: ObservableObject {
                 }
             }
             self.promptsID.shuffle()
+            self.currentPromptID = self.promptsID[0]
             print(self.promptsID)
-            print(self.promptsID[0])
+            print("prompt id:", self.currentPromptID)
             completion()
         }
     }
@@ -57,7 +59,7 @@ class PromptManager: ObservableObject {
                 if let document = document, document.exists {
                     if let prompt = document.data()?["text"] as? String {
                         self.currentPrompt = prompt
-                        print(prompt)
+                        print("prompt:", self.currentPrompt)
                     }
                 } else {
                     print("Document does not exist")
