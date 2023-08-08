@@ -26,9 +26,15 @@ struct PersonalizePromptsView: View {
                         .environmentObject(firebaseManager)
                         .padding()
                         .navigationDestination(isPresented: $countdownFinished) {
-                            RoundPlayerView()
-                                .environmentObject(promptManager)
-                                .navigationBarBackButtonHidden(true)
+                            if firebaseManager.currentJudgeID == firebaseManager.currentPlayerID {
+                                RoundJudgeView()
+                                    .environmentObject(promptManager)
+                                    .navigationBarBackButtonHidden(true)
+                            } else {
+                                RoundPlayerView()
+                                    .environmentObject(promptManager)
+                                    .navigationBarBackButtonHidden(true)
+                            }
                         }
                     
                     VStack {
@@ -41,6 +47,9 @@ struct PersonalizePromptsView: View {
                     }
                 }
             }
+        }
+        .onAppear {
+            promptManager.getRandomPrompt()
         }
     }
 }

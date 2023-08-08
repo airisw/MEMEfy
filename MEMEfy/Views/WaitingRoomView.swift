@@ -44,6 +44,8 @@ struct WaitingRoomView: View {
                             firebaseManager.updateTimestamp(roomCode: finalRoomCode)
                             print("timestamp updated")
                             firebaseManager.getTimestamp(roomCode: finalRoomCode)
+                            print("update judgeID")
+                            firebaseManager.updateJudgeID(roomCode: finalRoomCode)
                         } label: {
                             Text("Start Game")
                                 .padding()

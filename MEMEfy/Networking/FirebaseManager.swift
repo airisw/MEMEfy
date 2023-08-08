@@ -24,6 +24,7 @@ class FirebaseManager: ObservableObject {
     @Published fileprivate(set) var playersID = [String]()
     @Published fileprivate(set) var currentJudgeID = ""
     @Published fileprivate(set) var roundDocumentID = ""
+    @Published fileprivate(set) var currentPlayerID = ""
     
     let db = Firestore.firestore()
     
@@ -32,6 +33,7 @@ class FirebaseManager: ObservableObject {
     }
     
     func startGame(name: String, roomCode: String) -> String {
+        self.currentPlayerID = name
         var finalRoomCode = roomCode
         
         if finalRoomCode.isEmpty {
@@ -167,7 +169,7 @@ class FirebaseManager: ObservableObject {
             }
             self.playersID.shuffle()
             self.currentJudgeID = self.playersID[0]
-            print(self.playersID[0])
+            print("current judge: \(self.currentJudgeID)")
             completion()
         }
     }
