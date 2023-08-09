@@ -25,6 +25,9 @@ class FirebaseManager: ObservableObject {
     @Published fileprivate(set) var currentJudgeID = ""
     @Published fileprivate(set) var roundDocumentID = ""
     @Published fileprivate(set) var currentPlayerID = ""
+    @Published fileprivate(set) var roundDocID = ""
+    @Published fileprivate(set) var subDocID = ""
+    @Published fileprivate(set) var finalRoomCode = ""
     
     let db = Firestore.firestore()
     
@@ -60,6 +63,8 @@ class FirebaseManager: ObservableObject {
         addPlayers(name: name, roomCode: finalRoomCode)
         addRound(roomCode: finalRoomCode)
         
+        self.finalRoomCode = finalRoomCode
+        
         return finalRoomCode
     }
     
@@ -82,13 +87,29 @@ class FirebaseManager: ObservableObject {
         let newRound = Round(judgeId: "",
                              winnerId: "",
                              promptId: "",
-                             submissions: [],
+//                             submissions: [],
                              roundStart: Date())
         
         do {
             try newRoundRef.setData(from: newRound)
+            self.roundDocID = newRoundRef.documentID
         } catch {
             print("Error writing round")
+        }
+        
+        addSubmissions(roomCode: roomCode, name: self.currentPlayerID)
+    }
+    
+    func addSubmissions(roomCode: String, name: String) {
+        let newSubRef = db.collection("gameRoom").document(roomCode).collection("rounds").document(self.roundDocID).collection("submissions").document(name)
+        
+        let newSubmission = Submission(playerId: name, gifUrl: "")
+        
+        do {
+            try newSubRef.setData(from: newSubmission)
+            self.subDocID = newSubRef.documentID
+        } catch {
+            print("Error writing submission")
         }
     }
     
@@ -147,7 +168,7 @@ class FirebaseManager: ObservableObject {
                     print("timestamp from Firebase: \(self.timestamp)")
                     
                     let calendar = Calendar.current
-                    if let modifiedDate = calendar.date(byAdding: .second, value: 100, to: self.timestamp) {
+                    if let modifiedDate = calendar.date(byAdding: .second, value: 30, to: self.timestamp) {
                         self.modifiedDate = modifiedDate
                         print("added 100 secs: \(self.modifiedDate)")
                     }
@@ -191,6 +212,12 @@ class FirebaseManager: ObservableObject {
                     }
                 }
         }
+    }
+    
+//     submit gif url
+    func submitURL(roomCode: String, url: String) {
+        db.collection("gameRoom/\(roomCode)/rounds/\(self.roundDocID)/submissions")
+            .document(self.subDocID).setData(["gifUrl": url], merge: true)
     }
     
 //    func get submissions

@@ -27,7 +27,7 @@ struct Round: Codable, Identifiable {
     var judgeId: String
     var winnerId: String
     var promptId: String
-    var submissions: [Submission]
+//    var submissions: [Submission]
     var roundStart: Date
 }
 

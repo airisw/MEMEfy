@@ -72,6 +72,7 @@ struct GiphyPicker: UIViewControllerRepresentable {
 }
 
 struct SearchForm: View {
+    @EnvironmentObject var firebaseManager: FirebaseManager
     @State private var isGiphyPickerPresented = false
     @State private var selectedGifURL = ""
     
@@ -81,6 +82,13 @@ struct SearchForm: View {
                 KFAnimatedImage(url)
                     .scaledToFit()
                     .scaleEffect(0.8)
+            }
+            
+            Button {
+                firebaseManager.submitURL(roomCode: firebaseManager.finalRoomCode, url: selectedGifURL)
+                print("\(selectedGifURL) submitted")
+            } label: {
+                Text("Submit GIF")
             }
             
             GiphyPicker { url in
@@ -106,6 +114,7 @@ struct SearchForm_Previews: PreviewProvider {
                     .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                 
                 SearchForm()
+                    .environmentObject(FirebaseManager(gameRooms: []))
             }
         }
     }
