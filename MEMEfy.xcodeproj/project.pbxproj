@@ -34,11 +34,11 @@
 		22A4B62A2A731B9C003538BD /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 22A4B6292A731B9C003538BD /* FirebaseFirestoreSwift */; };
 		22A4B62F2A73F52F003538BD /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A4B62E2A73F52F003538BD /* FirebaseManager.swift */; };
 		22A4B64B2A7408E9003538BD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22A4B64A2A7408E8003538BD /* GoogleService-Info.plist */; };
+		22F47E0B2A84142A0064BD0D /* GIFImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F47E0A2A84142A0064BD0D /* GIFImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2225A4CD2A75ACD600FC89C0 /* apiKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = apiKey.plist; sourceTree = "<group>"; };
-		2225A4CF2A75ADB100FC89C0 /* GIPHYManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIPHYManager.swift; sourceTree = "<group>"; };
 		2225A4D22A75B4DF00FC89C0 /* SearchForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchForm.swift; sourceTree = "<group>"; };
 		2225A4D42A785FBF00FC89C0 /* PromptManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptManager.swift; sourceTree = "<group>"; };
 		2225A4D92A787B9700FC89C0 /* VotingForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingForm.swift; sourceTree = "<group>"; };
@@ -63,6 +63,7 @@
 		22A4B6242A7314E2003538BD /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		22A4B62E2A73F52F003538BD /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		22A4B64A2A7408E8003538BD /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		22F47E0A2A84142A0064BD0D /* GIFImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +130,7 @@
 				2225A4DB2A787C4C00FC89C0 /* RoundResults.swift */,
 				2225A4DD2A787C6000FC89C0 /* Scoreboard.swift */,
 				2225A5232A7F296A00FC89C0 /* CountdownTimer.swift */,
+				22F47E0A2A84142A0064BD0D /* GIFImage.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -161,7 +163,6 @@
 			isa = PBXGroup;
 			children = (
 				22A4B62E2A73F52F003538BD /* FirebaseManager.swift */,
-				2225A4CF2A75ADB100FC89C0 /* GIPHYManager.swift */,
 				2225A4D42A785FBF00FC89C0 /* PromptManager.swift */,
 			);
 			path = Networking;
@@ -266,6 +267,7 @@
 				22A4B62F2A73F52F003538BD /* FirebaseManager.swift in Sources */,
 				2225A4DE2A787C6000FC89C0 /* Scoreboard.swift in Sources */,
 				2225A4DC2A787C4C00FC89C0 /* RoundResults.swift in Sources */,
+				22F47E0B2A84142A0064BD0D /* GIFImage.swift in Sources */,
 				22A4B61B2A731481003538BD /* PersonalizePromptsView.swift in Sources */,
 				22A4B5BC2A70DD39003538BD /* MEMEfyApp.swift in Sources */,
 			);
