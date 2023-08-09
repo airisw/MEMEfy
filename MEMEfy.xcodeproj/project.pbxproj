@@ -34,7 +34,7 @@
 		22A4B62A2A731B9C003538BD /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 22A4B6292A731B9C003538BD /* FirebaseFirestoreSwift */; };
 		22A4B62F2A73F52F003538BD /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A4B62E2A73F52F003538BD /* FirebaseManager.swift */; };
 		22A4B64B2A7408E9003538BD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22A4B64A2A7408E8003538BD /* GoogleService-Info.plist */; };
-		22F47E0B2A84142A0064BD0D /* GIFImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F47E0A2A84142A0064BD0D /* GIFImage.swift */; };
+		22F47E112A841D440064BD0D /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 22F47E102A841D440064BD0D /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,7 +63,6 @@
 		22A4B6242A7314E2003538BD /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		22A4B62E2A73F52F003538BD /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		22A4B64A2A7408E8003538BD /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
-		22F47E0A2A84142A0064BD0D /* GIFImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22F47E112A841D440064BD0D /* Kingfisher in Frameworks */,
 				2225A51E2A7C93BD00FC89C0 /* GiphyUISDK in Frameworks */,
 				22A4B6282A731B9C003538BD /* FirebaseFirestore in Frameworks */,
 				22A4B62A2A731B9C003538BD /* FirebaseFirestoreSwift in Frameworks */,
@@ -130,7 +130,6 @@
 				2225A4DB2A787C4C00FC89C0 /* RoundResults.swift */,
 				2225A4DD2A787C6000FC89C0 /* Scoreboard.swift */,
 				2225A5232A7F296A00FC89C0 /* CountdownTimer.swift */,
-				22F47E0A2A84142A0064BD0D /* GIFImage.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -188,6 +187,7 @@
 				22A4B6272A731B9C003538BD /* FirebaseFirestore */,
 				22A4B6292A731B9C003538BD /* FirebaseFirestoreSwift */,
 				2225A51D2A7C93BD00FC89C0 /* GiphyUISDK */,
+				22F47E102A841D440064BD0D /* Kingfisher */,
 			);
 			productName = MEMEfy;
 			productReference = 22A4B5B82A70DD39003538BD /* MEMEfy.app */;
@@ -220,6 +220,8 @@
 			packageReferences = (
 				22A4B6262A731B9C003538BD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				2225A51C2A7C93BD00FC89C0 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */,
+				22F47E0C2A841AE30064BD0D /* XCRemoteSwiftPackageReference "FLAnimatedImage" */,
+				22F47E0F2A841D440064BD0D /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 22A4B5B92A70DD39003538BD /* Products */;
 			projectDirPath = "";
@@ -267,7 +269,6 @@
 				22A4B62F2A73F52F003538BD /* FirebaseManager.swift in Sources */,
 				2225A4DE2A787C6000FC89C0 /* Scoreboard.swift in Sources */,
 				2225A4DC2A787C4C00FC89C0 /* RoundResults.swift in Sources */,
-				22F47E0B2A84142A0064BD0D /* GIFImage.swift in Sources */,
 				22A4B61B2A731481003538BD /* PersonalizePromptsView.swift in Sources */,
 				22A4B5BC2A70DD39003538BD /* MEMEfyApp.swift in Sources */,
 			);
@@ -488,6 +489,22 @@
 				minimumVersion = 10.0.0;
 			};
 		};
+		22F47E0C2A841AE30064BD0D /* XCRemoteSwiftPackageReference "FLAnimatedImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Flipboard/FLAnimatedImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.16;
+			};
+		};
+		22F47E0F2A841D440064BD0D /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -505,6 +522,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 22A4B6262A731B9C003538BD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
+		};
+		22F47E102A841D440064BD0D /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 22F47E0F2A841D440064BD0D /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

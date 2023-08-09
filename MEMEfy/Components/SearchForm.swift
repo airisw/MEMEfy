@@ -7,6 +7,7 @@
 
 import SwiftUI
 import GiphyUISDK
+import Kingfisher
 
 struct GiphyPicker: UIViewControllerRepresentable {
     var completion: ((String) -> Void)
@@ -19,7 +20,7 @@ struct GiphyPicker: UIViewControllerRepresentable {
         
         Giphy.configure(apiKey: apiKey)
         let giphy = GiphyViewController()
-        GiphyViewController.trayHeightMultiplier = 0.8
+        GiphyViewController.trayHeightMultiplier = 1.0
         giphy.mediaTypeConfig = [.gifs]
         giphy.delegate = context.coordinator
         giphy.theme = GPHTheme(type: .lightBlur)
@@ -76,6 +77,12 @@ struct SearchForm: View {
     
     var body: some View {
         VStack {
+            if let url = URL(string: selectedGifURL) {
+                KFAnimatedImage(url)
+                    .scaledToFit()
+                    .scaleEffect(0.8)
+            }
+            
             GiphyPicker { url in
                 selectedGifURL = url
                 print("gif url: \(selectedGifURL)")
@@ -83,7 +90,7 @@ struct SearchForm: View {
             } onShouldDismissGifPicker: {
                 isGiphyPickerPresented = false
             }
-        .ignoresSafeArea()
+            .ignoresSafeArea()
         }
     }
 }
