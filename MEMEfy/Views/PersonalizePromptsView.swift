@@ -47,6 +47,7 @@ struct PersonalizePromptsView: View {
                         }
                         .onChange(of: countdownFinished) { newValue in
                             if newValue {
+                                promptManager.getRandomPrompt()
                                 firebaseManager.updateRoundStart(roomCode: firebaseManager.finalRoomCode)
                                 firebaseManager.getRoundStart(roomCode: firebaseManager.finalRoomCode)
                             }
@@ -62,9 +63,6 @@ struct PersonalizePromptsView: View {
                     }
                 }
             }
-        }
-        .onAppear {
-            promptManager.getRandomPrompt()
         }
     }
 }
