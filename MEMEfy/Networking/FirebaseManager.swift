@@ -29,6 +29,7 @@ class FirebaseManager: ObservableObject {
     @Published fileprivate(set) var subDocID = ""
     @Published fileprivate(set) var finalRoomCode = ""
     @Published fileprivate(set) var modifiedRoundStart = Date()
+    @Published fileprivate(set) var submissions = [String]()
     
     let db = Firestore.firestore()
     
@@ -247,6 +248,20 @@ class FirebaseManager: ObservableObject {
     }
     
 //    func get submissions
+    func fetchGifs(roomCode: String) {
+        db.collection("gameRoom/\(roomCode)/rounds/\(self.roundDocID)/submissions").getDocuments() { (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                print("Error fetching submissions: \(error!)")
+                return
+            }
+                
+            let submissions = documents.map { $0["gifUrl"] as! String }
+            print("Submitted GIFs: \(submissions)")
+            
+            self.submissions = submissions
+            print(self.submissions)
+        }
+    }
     
 //    func delete gameRoom
     func deleteGameRoom(roomCode: String) {

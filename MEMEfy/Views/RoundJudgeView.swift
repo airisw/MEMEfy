@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RoundJudgeView: View {
+    @EnvironmentObject var promptManager: PromptManager
     @EnvironmentObject var firebaseManager: FirebaseManager
     @State private var countdownFinished = false
     
@@ -25,6 +26,8 @@ struct RoundJudgeView: View {
                         .padding()
                         .navigationDestination(isPresented: $countdownFinished) {
                             VotingJudgeView()
+                                .environmentObject(promptManager)
+                                .environmentObject(firebaseManager)
                                 .navigationBarBackButtonHidden(true)
                         }
 
@@ -43,6 +46,7 @@ struct RoundJudgeView: View {
 struct RoundJudgeView_Previews: PreviewProvider {
     static var previews: some View {
         RoundJudgeView()
+            .environmentObject(PromptManager(prompts: []))
             .environmentObject(FirebaseManager(gameRooms: []))
     }
 }

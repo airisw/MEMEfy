@@ -8,13 +8,36 @@
 import SwiftUI
 
 struct VotingJudgeView: View {
+    @EnvironmentObject var promptManager: PromptManager
+    @EnvironmentObject var firebaseManager: FirebaseManager
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GeometryReader { geo in
+            ZStack {
+                Image("Wallpaper")
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+                    .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+                
+                VStack {
+                    //                        Text("<timer>")
+                    //                            .font(.title)
+                    //                            .padding(.vertical)
+                    
+                    VotingForm()
+                        .environmentObject(promptManager)
+                        .environmentObject(firebaseManager)
+                }
+            }
+        }
     }
 }
 
 struct VotingJudgeView_Previews: PreviewProvider {
     static var previews: some View {
         VotingJudgeView()
+            .environmentObject(PromptManager(prompts: []))
+            .environmentObject(FirebaseManager(gameRooms: []))
     }
 }
