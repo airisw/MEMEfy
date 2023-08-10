@@ -35,6 +35,10 @@ struct RoundJudgeView: View {
                     Text("It's your turn to vote!")
                         .font(.title2)
                     
+                    Text("Waiting for other players to submit their answers")
+                        .padding()
+                        .multilineTextAlignment(.center)
+                    
                     Spacer()
                 }
                 .padding(.top, 70)
