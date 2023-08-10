@@ -11,23 +11,29 @@ import Kingfisher
 struct VotingForm: View {
     @EnvironmentObject var promptManager: PromptManager
     @EnvironmentObject var firebaseManager: FirebaseManager
-    @State var selectedGifIndex: String?
+    @State var selectedGif: String?
     
     var body: some View {
         ScrollView {
-            Text(promptManager.currentPrompt)
-                .padding(.horizontal)
+            Button {
+                firebaseManager.fetchWinnerId(roomCode: firebaseManager.finalRoomCode, winnerGIF: selectedGif) {
+                        firebaseManager.updateWinner(roomCode: firebaseManager.finalRoomCode)
+                }
+                print("winner updated")
+            } label: {
+                Text("Choose winner")
+            }
             
             ForEach(firebaseManager.submissions, id: \.self) { gifURL in
                 if let submission = URL(string: gifURL) {
                     KFAnimatedImage(submission)
                         .scaledToFit()
-                        .border(selectedGifIndex == gifURL ? Color.black : Color.clear, width: 5)
+                        .border(selectedGif == gifURL ? Color.black : Color.clear, width: 5)
                         .onTapGesture {
-                            if selectedGifIndex == gifURL {
-                                selectedGifIndex = nil
+                            if selectedGif == gifURL {
+                                selectedGif = nil
                             } else {
-                                selectedGifIndex = gifURL
+                                selectedGif = gifURL
                             }
                         }
                         .padding()

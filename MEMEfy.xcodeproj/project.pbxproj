@@ -36,7 +36,6 @@
 		22A4B64B2A7408E9003538BD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22A4B64A2A7408E8003538BD /* GoogleService-Info.plist */; };
 		22F47E112A841D440064BD0D /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 22F47E102A841D440064BD0D /* Kingfisher */; };
 		22F47E152A84C25F0064BD0D /* RoundTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F47E142A84C25F0064BD0D /* RoundTimer.swift */; };
-		22F47E172A8564200064BD0D /* VotingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F47E162A8564200064BD0D /* VotingTimer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,7 +65,6 @@
 		22A4B62E2A73F52F003538BD /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		22A4B64A2A7408E8003538BD /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		22F47E142A84C25F0064BD0D /* RoundTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundTimer.swift; sourceTree = "<group>"; };
-		22F47E162A8564200064BD0D /* VotingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingTimer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,7 +133,6 @@
 				2225A4DD2A787C6000FC89C0 /* Scoreboard.swift */,
 				2225A5232A7F296A00FC89C0 /* CountdownTimer.swift */,
 				22F47E142A84C25F0064BD0D /* RoundTimer.swift */,
-				22F47E162A8564200064BD0D /* VotingTimer.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -261,7 +258,6 @@
 				22A4B60F2A72F640003538BD /* PromptForm.swift in Sources */,
 				22A4B61F2A7314AC003538BD /* RoundPlayerView.swift in Sources */,
 				22A4B6152A72FBDD003538BD /* GameRoomModel.swift in Sources */,
-				22F47E172A8564200064BD0D /* VotingTimer.swift in Sources */,
 				22F47E152A84C25F0064BD0D /* RoundTimer.swift in Sources */,
 				22A4B6232A7314CF003538BD /* VotingJudgeView.swift in Sources */,
 				22A4B6252A7314E2003538BD /* ResultView.swift in Sources */,

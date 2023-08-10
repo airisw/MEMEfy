@@ -23,19 +23,24 @@ class FirebaseManager: ObservableObject {
     @Published fileprivate(set) var modifiedDate = Date()
     @Published fileprivate(set) var playersID = [String]()
     @Published fileprivate(set) var currentJudgeID = ""
-    @Published fileprivate(set) var roundDocumentID = ""
+//    @Published fileprivate(set) var roundDocumentID = ""
     @Published fileprivate(set) var currentPlayerID = ""
     @Published fileprivate(set) var roundDocID = ""
     @Published fileprivate(set) var subDocID = ""
     @Published fileprivate(set) var finalRoomCode = ""
     @Published fileprivate(set) var modifiedRoundStart = Date()
     @Published fileprivate(set) var submissions = [String]()
+    @Published fileprivate(set) var winnerId = ""
     
     let db = Firestore.firestore()
     
     init(gameRooms: [GameRoom]) {
         self.gameRooms = gameRooms
     }
+    
+//    func fetch game rooms
+    
+//    func validate room code
     
     func startGame(name: String, roomCode: String) -> String {
         self.currentPlayerID = name
@@ -261,6 +266,33 @@ class FirebaseManager: ObservableObject {
             self.submissions = submissions
             print(self.submissions)
         }
+    }
+    
+//    func update winner
+    func fetchWinnerId(roomCode: String, winnerGIF: String?, completion: @escaping () -> Void) {
+        if let winnerGIF = winnerGIF {
+            db.collection("gameRoom/\(roomCode)/rounds/\(self.roundDocID)/submissions")
+                .whereField("gifUrl", isEqualTo: winnerGIF).getDocuments() { (querySnapshot, error) in
+                    if let error = error {
+                        print("Error fetching winner ID: \(error)")
+                    } else {
+                        for document in querySnapshot!.documents {
+                            if let playerId = document.data()["playerId"] as? String {
+                                self.winnerId = playerId
+                                print("fetched winner id:", self.winnerId)
+                                completion()
+                            }
+                        }
+                    }
+                }
+        } else {
+            // no winner
+        }
+    }
+    
+    func updateWinner(roomCode: String) {
+        db.collection("gameRoom/\(roomCode)/rounds").document(self.roundDocID)
+            .setData(["winnerId": self.winnerId], merge: true)
     }
     
 //    func delete gameRoom
