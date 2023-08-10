@@ -26,14 +26,29 @@ struct PersonalizePromptsView: View {
                         .environmentObject(firebaseManager)
                         .padding()
                         .navigationDestination(isPresented: $countdownFinished) {
+//                            TESTING ROUNDPLAYERVIEW
+//                            RoundPlayerView()
+//                                .environmentObject(promptManager)
+//                                .environmentObject(firebaseManager)
+//                                .navigationBarBackButtonHidden(true)
+                            
+//                            RENDER VIEW ACCORDING TO JUDGEID
                             if firebaseManager.currentJudgeID == firebaseManager.currentPlayerID {
                                 RoundJudgeView()
                                     .environmentObject(promptManager)
+                                    .environmentObject(firebaseManager)
                                     .navigationBarBackButtonHidden(true)
                             } else {
                                 RoundPlayerView()
                                     .environmentObject(promptManager)
+                                    .environmentObject(firebaseManager)
                                     .navigationBarBackButtonHidden(true)
+                            }
+                        }
+                        .onChange(of: countdownFinished) { newValue in
+                            if newValue {
+                                firebaseManager.updateRoundStart(roomCode: firebaseManager.finalRoomCode)
+                                firebaseManager.getRoundStart(roomCode: firebaseManager.finalRoomCode)
                             }
                         }
                     

@@ -19,7 +19,7 @@ extension String {
 class FirebaseManager: ObservableObject {
     @Published fileprivate(set) var gameRooms: [GameRoom] = []
     @Published fileprivate(set) var players = [String]()
-    @Published fileprivate(set) var timestamp = Date()
+//    @Published fileprivate(set) var timestamp = Date()
     @Published fileprivate(set) var modifiedDate = Date()
     @Published fileprivate(set) var playersID = [String]()
     @Published fileprivate(set) var currentJudgeID = ""
@@ -28,6 +28,7 @@ class FirebaseManager: ObservableObject {
     @Published fileprivate(set) var roundDocID = ""
     @Published fileprivate(set) var subDocID = ""
     @Published fileprivate(set) var finalRoomCode = ""
+    @Published fileprivate(set) var modifiedRoundStart = Date()
     
     let db = Firestore.firestore()
     
@@ -155,22 +156,22 @@ class FirebaseManager: ObservableObject {
 //            }
 //        }
     
-    func updateTimestamp(roomCode: String) {
+    func updateGameStart(roomCode: String) {
         db.collection("gameRoom").document(roomCode).setData(["gameStart": Date()], merge: true)
     }
     
-    func getTimestamp(roomCode: String) {
+    func getGameStart(roomCode: String) {
         db.collection("gameRoom").document(roomCode).getDocument { (document, error) in
             if let document = document, document.exists {
                 if let timestamp = document.data()?["gameStart"] as? Timestamp {
                     let date = timestamp.dateValue()
-                    self.timestamp = date
-                    print("timestamp from Firebase: \(self.timestamp)")
+//                    self.timestamp = date
+                    print("gameStart from Firebase: \(date)")
                     
                     let calendar = Calendar.current
-                    if let modifiedDate = calendar.date(byAdding: .second, value: 30, to: self.timestamp) {
+                    if let modifiedDate = calendar.date(byAdding: .second, value: 20, to: date) {
                         self.modifiedDate = modifiedDate
-                        print("added 100 secs: \(self.modifiedDate)")
+                        print("added 20 secs: \(self.modifiedDate)")
                     }
                 }
             } else {
@@ -218,6 +219,31 @@ class FirebaseManager: ObservableObject {
     func submitURL(roomCode: String, url: String) {
         db.collection("gameRoom/\(roomCode)/rounds/\(self.roundDocID)/submissions")
             .document(self.subDocID).setData(["gifUrl": url], merge: true)
+    }
+    
+    func updateRoundStart(roomCode: String) {
+        print("upadting roundstart")
+        db.collection("gameRoom/\(roomCode)/rounds")
+            .document(self.roundDocID).setData(["roundStart": Date()], merge: true)
+    }
+    
+    func getRoundStart(roomCode: String) {
+        db.collection("gameRoom/\(roomCode)/rounds").document(self.roundDocID).getDocument { (document, error) in
+            if let document = document, document.exists {
+                if let timestamp = document.data()?["roundStart"] as? Timestamp {
+                    let date = timestamp.dateValue()
+                    print("roundStart from Firebase: \(date)")
+                    
+                    let calendar = Calendar.current
+                    if let modifiedDate = calendar.date(byAdding: .second, value: 30, to: date) {
+                        self.modifiedRoundStart = modifiedDate
+                        print("added 30 secs: \(self.modifiedRoundStart)")
+                    }
+                }
+            } else {
+                print("Document does not exist")
+                }
+        }
     }
     
 //    func get submissions

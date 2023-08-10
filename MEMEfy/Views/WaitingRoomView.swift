@@ -41,9 +41,9 @@ struct WaitingRoomView: View {
                         Button {
                             print("Start Game button tapped")
                             isStartGameTapped = true
-                            firebaseManager.updateTimestamp(roomCode: finalRoomCode)
+                            firebaseManager.updateGameStart(roomCode: finalRoomCode)
                             print("timestamp updated")
-                            firebaseManager.getTimestamp(roomCode: finalRoomCode)
+                            firebaseManager.getGameStart(roomCode: finalRoomCode)
                             print("update judgeID")
                             firebaseManager.updateJudgeID(roomCode: finalRoomCode)
                         } label: {
