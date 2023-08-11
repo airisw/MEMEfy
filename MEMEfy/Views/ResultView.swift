@@ -30,7 +30,6 @@ struct ResultView: View {
                         .environmentObject(firebaseManager)
                     
                     Scoreboard()
-                        .environmentObject(promptManager)
                         .environmentObject(firebaseManager)
                     
                     HStack {
@@ -40,6 +39,8 @@ struct ResultView: View {
                             Text("Next Round")
                                 .padding()
                         }
+                        // choose judgeid
+                        // brings to roundjudgeview or roundplayerview
                         
                         Button {
                             print("End of Game")
@@ -47,6 +48,8 @@ struct ResultView: View {
                             Text("End Game")
                                 .padding()
                         }
+                        // deletes roomCode
+                        // deletes iscustom true -> only for roomcode
                     }
                 }
             }
