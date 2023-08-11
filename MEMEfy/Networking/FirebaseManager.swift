@@ -285,15 +285,69 @@ class FirebaseManager: ObservableObject {
                         }
                     }
                 }
-        } else {
-            // no winner
         }
+//        } else {
+//            // no winner
+//        }
     }
     
     func updateWinner(roomCode: String) {
         db.collection("gameRoom/\(roomCode)/rounds").document(self.roundDocID)
             .setData(["winnerId": self.winnerId], merge: true)
     }
+    
+//    judge has to choose winner
+//    func getRoundUpdate(roomCode: String) {
+//        db.collection("gameRoom/\(roomCode)/rounds").document(self.roundDocID).addSnapshotListener { documentSnapshot, error in
+//            guard let document = documentSnapshot, document.exists else {
+//                print("Error fetching document: \(error!)")
+//                return
+//            }
+//
+//            if let data = document.data(), let _ = data["winnerId"] as? String {
+//                ResultView()
+//            }
+//
+//        }
+//    }
+    
+//    winner scores +1 pt
+    func scorePoint(roomCode: String) {
+        let winnerRef = db.collection("gameRoom/\(roomCode)/players").document(self.winnerId)
+
+        db.runTransaction({ (transaction, errorPointer) -> Any? in
+            let document: DocumentSnapshot
+            do {
+                try document = transaction.getDocument(winnerRef)
+            } catch let fetchError as NSError {
+                errorPointer?.pointee = fetchError
+                return nil
+            }
+
+            guard let currentScore = document.data()?["totalScore"] as? Int else {
+                let error = NSError(
+                    domain: "AppErrorDomain",
+                    code: -1,
+                    userInfo: [
+                        NSLocalizedDescriptionKey: "Unable to retrieve population from snapshot \(document)"
+                    ]
+                )
+                errorPointer?.pointee = error
+                return nil
+            }
+
+            transaction.updateData(["totalScore": currentScore + 1], forDocument: winnerRef)
+            return nil
+        }) { (object, error) in
+            if let error = error {
+                print("Transaction failed: \(error)")
+            } else {
+                print("Transaction successfully committed!")
+            }
+        }
+    }
+    
+//    func get scoreboard
     
 //    func delete gameRoom
     func deleteGameRoom(roomCode: String) {

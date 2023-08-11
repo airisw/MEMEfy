@@ -19,6 +19,8 @@ struct VotingForm: View {
             Button {
                 firebaseManager.fetchWinnerId(roomCode: firebaseManager.finalRoomCode, winnerGIF: selectedGif) {
                         firebaseManager.updateWinner(roomCode: firebaseManager.finalRoomCode)
+                    
+                    firebaseManager.scorePoint(roomCode: firebaseManager.finalRoomCode)
                 }
                 print("winner updated")
                 isChooseWinnerTapped = true
