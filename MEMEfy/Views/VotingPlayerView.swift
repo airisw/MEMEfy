@@ -20,9 +20,14 @@ struct VotingPlayerView: View {
                     .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                 
                 VStack {
+                    Text("Voting Time")
+                        .font(.title)
+                    
 //                    Text("<timer>")
 //                        .font(.title)
 //                        .padding(.vertical)
+                    
+                    // render ResultView
                     
                     Text("Waiting for \(firebaseManager.currentJudgeID) to vote")
                         .font(.title2)

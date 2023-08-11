@@ -21,6 +21,9 @@ struct VotingJudgeView: View {
                     .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                 
                 VStack {
+                    Text("Voting Time")
+                        .font(.title)
+                    
                     Text(promptManager.currentPrompt)
                         .padding(.horizontal)
                     
