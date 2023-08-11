@@ -11,7 +11,7 @@
 		2225A4D32A75B4DF00FC89C0 /* SearchForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2225A4D22A75B4DF00FC89C0 /* SearchForm.swift */; };
 		2225A4D52A785FBF00FC89C0 /* PromptManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2225A4D42A785FBF00FC89C0 /* PromptManager.swift */; };
 		2225A4DA2A787B9700FC89C0 /* VotingForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2225A4D92A787B9700FC89C0 /* VotingForm.swift */; };
-		2225A4DC2A787C4C00FC89C0 /* RoundResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2225A4DB2A787C4C00FC89C0 /* RoundResults.swift */; };
+		2225A4DC2A787C4C00FC89C0 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2225A4DB2A787C4C00FC89C0 /* Result.swift */; };
 		2225A4DE2A787C6000FC89C0 /* Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2225A4DD2A787C6000FC89C0 /* Scoreboard.swift */; };
 		2225A51E2A7C93BD00FC89C0 /* GiphyUISDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2225A51D2A7C93BD00FC89C0 /* GiphyUISDK */; };
 		2225A5242A7F296A00FC89C0 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2225A5232A7F296A00FC89C0 /* CountdownTimer.swift */; };
@@ -43,7 +43,7 @@
 		2225A4D22A75B4DF00FC89C0 /* SearchForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchForm.swift; sourceTree = "<group>"; };
 		2225A4D42A785FBF00FC89C0 /* PromptManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptManager.swift; sourceTree = "<group>"; };
 		2225A4D92A787B9700FC89C0 /* VotingForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingForm.swift; sourceTree = "<group>"; };
-		2225A4DB2A787C4C00FC89C0 /* RoundResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundResults.swift; sourceTree = "<group>"; };
+		2225A4DB2A787C4C00FC89C0 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		2225A4DD2A787C6000FC89C0 /* Scoreboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scoreboard.swift; sourceTree = "<group>"; };
 		2225A5232A7F296A00FC89C0 /* CountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimer.swift; sourceTree = "<group>"; };
 		22A4B5B82A70DD39003538BD /* MEMEfy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MEMEfy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,7 +129,7 @@
 				22A4B60E2A72F640003538BD /* PromptForm.swift */,
 				2225A4D22A75B4DF00FC89C0 /* SearchForm.swift */,
 				2225A4D92A787B9700FC89C0 /* VotingForm.swift */,
-				2225A4DB2A787C4C00FC89C0 /* RoundResults.swift */,
+				2225A4DB2A787C4C00FC89C0 /* Result.swift */,
 				2225A4DD2A787C6000FC89C0 /* Scoreboard.swift */,
 				2225A5232A7F296A00FC89C0 /* CountdownTimer.swift */,
 				22F47E142A84C25F0064BD0D /* RoundTimer.swift */,
@@ -272,7 +272,7 @@
 				22A4B5D42A70F51B003538BD /* LoginForm.swift in Sources */,
 				22A4B62F2A73F52F003538BD /* FirebaseManager.swift in Sources */,
 				2225A4DE2A787C6000FC89C0 /* Scoreboard.swift in Sources */,
-				2225A4DC2A787C4C00FC89C0 /* RoundResults.swift in Sources */,
+				2225A4DC2A787C4C00FC89C0 /* Result.swift in Sources */,
 				22A4B61B2A731481003538BD /* PersonalizePromptsView.swift in Sources */,
 				22A4B5BC2A70DD39003538BD /* MEMEfyApp.swift in Sources */,
 			);
