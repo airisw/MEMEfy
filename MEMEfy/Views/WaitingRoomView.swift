@@ -32,10 +32,15 @@ struct WaitingRoomView: View {
                             Text("Waiting for players...")
                                 .padding(.horizontal)
                             
-                            ForEach(firebaseManager.players, id: \.self) { player in
-                                Text(player)
+                            ForEach(firebaseManager.players) { player in
+                                Text(player.name)
                                     .padding(.leading)
                             }
+                            
+//                            ForEach(firebaseManager.playersList, id: \.self) { player in
+//                                Text(player)
+//                                    .padding(.leading)
+//                            }
                         }
                         
                         Button {

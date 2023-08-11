@@ -18,7 +18,8 @@ extension String {
 
 class FirebaseManager: ObservableObject {
     @Published fileprivate(set) var gameRooms: [GameRoom] = []
-    @Published fileprivate(set) var players = [String]()
+    @Published fileprivate(set) var players = [Player]()
+//    @Published fileprivate(set) var playersList = [String]()
 //    @Published fileprivate(set) var timestamp = Date()
     @Published fileprivate(set) var modifiedDate = Date()
     @Published fileprivate(set) var playersID = [String]()
@@ -128,11 +129,19 @@ class FirebaseManager: ObservableObject {
                 return
             }
                 
-            let names = documents.map { $0["name"] as! String }.sorted()
-            print("Current players: \(names)")
+            self.players = documents.compactMap { document -> Player? in
+                do {
+                    return try document.data(as: Player.self)
+                } catch {
+                    print("Error decoding document into Player: \(error)")
+                    return nil
+                }
+            }
             
-            self.players = names
-
+//            let names = documents.map { $0["name"] as! String }.sorted()
+//            print("Current players: \(names)")
+//
+//            self.playersList = names
         }
     }
      
@@ -329,7 +338,7 @@ class FirebaseManager: ObservableObject {
                     domain: "AppErrorDomain",
                     code: -1,
                     userInfo: [
-                        NSLocalizedDescriptionKey: "Unable to retrieve population from snapshot \(document)"
+                        NSLocalizedDescriptionKey: "Unable to retrieve current score from snapshot \(document)"
                     ]
                 )
                 errorPointer?.pointee = error
@@ -346,8 +355,6 @@ class FirebaseManager: ObservableObject {
             }
         }
     }
-    
-//    func get scoreboard
     
 //    func delete gameRoom
     func deleteGameRoom(roomCode: String) {
