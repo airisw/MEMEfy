@@ -32,6 +32,7 @@ class FirebaseManager: ObservableObject {
     @Published fileprivate(set) var modifiedRoundStart = Date()
     @Published fileprivate(set) var submissions = [String]()
     @Published fileprivate(set) var winnerId = ""
+    @Published fileprivate(set) var isWinnerUpdated = false
     
     let db = Firestore.firestore()
     
@@ -352,6 +353,27 @@ class FirebaseManager: ObservableObject {
                 print("Transaction failed: \(error)")
             } else {
                 print("Transaction successfully committed!")
+            }
+        }
+    }
+    
+//    func get real time updates of winner
+    func checkWinner(roomCode: String) {
+        db.collection("gameRoom/\(roomCode)/rounds").document(self.roundDocID).addSnapshotListener { (documentSnapshot, error) in
+            guard let document = documentSnapshot else {
+                print("Error fetching documents: \(error!)")
+                return
+            }
+            
+            guard let data = document.data() else {
+                print("Document data was empty")
+                return
+            }
+            
+            if let winnerId = data["winnerId"] as? String {
+                if winnerId != "" {
+                    self.isWinnerUpdated = true
+                }
             }
         }
     }
