@@ -380,6 +380,12 @@ class FirebaseManager: ObservableObject {
     
 //    func delete gameRoom
     func deleteGameRoom(roomCode: String) {
+        db.collection("gameRoom/\(roomCode)/rounds").document(self.roundDocID).delete() { error in
+            if let error = error {
+                print("Error deleting rounds document: \(error)")
+            }
+        }
+        
         db.collection("gameRoom").document(roomCode).delete() { error in
             if let error = error {
                 print("Error deleting gameRoom: \(error)")

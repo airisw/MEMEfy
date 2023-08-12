@@ -10,6 +10,7 @@ import SwiftUI
 struct ResultView: View {
     @EnvironmentObject var promptManager: PromptManager
     @EnvironmentObject var firebaseManager: FirebaseManager
+    @State private var isEndGameTapped = false
     var selectedGif: String?
     
     var body: some View {
@@ -44,9 +45,15 @@ struct ResultView: View {
                         
                         Button {
                             print("End of Game")
+                            firebaseManager.deleteGameRoom(roomCode: firebaseManager.finalRoomCode)
+                            isEndGameTapped = true
                         } label: {
                             Text("End Game")
                                 .padding()
+                        }
+                        .navigationDestination(isPresented: $isEndGameTapped) {
+                            ContentView(firebaseManager: FirebaseManager(gameRooms: []))
+                                .navigationBarBackButtonHidden(true)
                         }
                         // deletes roomCode
                         // deletes iscustom true -> only for roomcode
