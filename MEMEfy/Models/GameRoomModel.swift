@@ -11,8 +11,6 @@ import FirebaseFirestoreSwift
 struct GameRoom: Codable, Identifiable {
     @DocumentID var id: String?
     var roomCode: String
-//    var players: [Player]
-//    var rounds: [Round]
     var gameStart: Date
 }
 
@@ -27,7 +25,6 @@ struct Round: Codable, Identifiable {
     var judgeId: String
     var winnerId: String
     var promptId: String
-//    var submissions: [Submission]
     var roundStart: Date
 }
 

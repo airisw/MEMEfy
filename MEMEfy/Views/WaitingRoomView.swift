@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct WaitingRoomView: View {
-//    @StateObject var firebaseManager: FirebaseManager
     @EnvironmentObject var firebaseManager: FirebaseManager
     @State private var isStartGameTapped = false
     var finalRoomCode: String
@@ -36,11 +35,6 @@ struct WaitingRoomView: View {
                                 Text(player.name)
                                     .padding(.leading)
                             }
-                            
-//                            ForEach(firebaseManager.playersList, id: \.self) { player in
-//                                Text(player)
-//                                    .padding(.leading)
-//                            }
                         }
                         
                         Button {
@@ -76,7 +70,6 @@ struct WaitingRoomView_Previews: PreviewProvider {
     @State static var finalRoomCode = "<room code>"
     
     static var previews: some View {
-//        WaitingRoomView(firebaseManager: FirebaseManager(gameRooms: []), finalRoomCode: finalRoomCode)
         WaitingRoomView(finalRoomCode: finalRoomCode)
             .environmentObject(FirebaseManager(gameRooms: []))
     }

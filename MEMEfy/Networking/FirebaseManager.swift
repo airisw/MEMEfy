@@ -19,12 +19,9 @@ extension String {
 class FirebaseManager: ObservableObject {
     @Published fileprivate(set) var gameRooms: [GameRoom] = []
     @Published fileprivate(set) var players = [Player]()
-//    @Published fileprivate(set) var playersList = [String]()
-//    @Published fileprivate(set) var timestamp = Date()
     @Published fileprivate(set) var modifiedDate = Date()
     @Published fileprivate(set) var playersID = [String]()
     @Published fileprivate(set) var currentJudgeID = ""
-//    @Published fileprivate(set) var roundDocumentID = ""
     @Published fileprivate(set) var currentPlayerID = ""
     @Published fileprivate(set) var roundDocID = ""
     @Published fileprivate(set) var subDocID = ""
@@ -40,10 +37,6 @@ class FirebaseManager: ObservableObject {
         self.gameRooms = gameRooms
     }
     
-//    func fetch game rooms
-    
-//    func validate room code
-    
     func startGame(name: String, roomCode: String) -> String {
         self.currentPlayerID = name
         var finalRoomCode = roomCode
@@ -58,8 +51,6 @@ class FirebaseManager: ObservableObject {
         
         let gameRoom = GameRoom(
             roomCode: finalRoomCode,
-//            players: [player],
-//            rounds: [],
             gameStart: Date()
         )
         
@@ -96,7 +87,6 @@ class FirebaseManager: ObservableObject {
         let newRound = Round(judgeId: "",
                              winnerId: "",
                              promptId: "",
-//                             submissions: [],
                              roundStart: Date())
         
         do {
@@ -138,39 +128,8 @@ class FirebaseManager: ObservableObject {
                     return nil
                 }
             }
-            
-//            let names = documents.map { $0["name"] as! String }.sorted()
-//            print("Current players: \(names)")
-//
-//            self.playersList = names
         }
     }
-     
-//    real time updates of players field
-//        func getPlayers(roomCode: String) {
-////            let gameRoomRef = db.collection("gameRoom").document(roomCode).collection("players")
-//            let gameRoomRef = db.collection("gameRoom").document(roomCode)
-//
-//            gameRoomRef.addSnapshotListener { querySnapshot, error in
-//                guard let document = querySnapshot else {
-//                    print("Error fetching documents: \(error!)")
-//                    return
-//                }
-//
-//                guard let data = document.data() else {
-//                    print("Document was empty")
-//                    return
-//                }
-//
-//                print(data)
-//
-////                if let players = data["players"] as? Dictionary<String, Any> {
-////                    print(players)
-////                    let name = players["name"]
-////                    print(name)
-////                }
-//            }
-//        }
     
     func updateGameStart(roomCode: String) {
         db.collection("gameRoom").document(roomCode).setData(["gameStart": Date()], merge: true)
@@ -181,7 +140,6 @@ class FirebaseManager: ObservableObject {
             if let document = document, document.exists {
                 if let timestamp = document.data()?["gameStart"] as? Timestamp {
                     let date = timestamp.dateValue()
-//                    self.timestamp = date
                     print("gameStart from Firebase: \(date)")
                     
                     let calendar = Calendar.current
@@ -296,30 +254,12 @@ class FirebaseManager: ObservableObject {
                     }
                 }
         }
-//        } else {
-//            // no winner
-//        }
     }
     
     func updateWinner(roomCode: String) {
         db.collection("gameRoom/\(roomCode)/rounds").document(self.roundDocID)
             .setData(["winnerId": self.winnerId], merge: true)
     }
-    
-//    judge has to choose winner
-//    func getRoundUpdate(roomCode: String) {
-//        db.collection("gameRoom/\(roomCode)/rounds").document(self.roundDocID).addSnapshotListener { documentSnapshot, error in
-//            guard let document = documentSnapshot, document.exists else {
-//                print("Error fetching document: \(error!)")
-//                return
-//            }
-//
-//            if let data = document.data(), let _ = data["winnerId"] as? String {
-//                ResultView()
-//            }
-//
-//        }
-//    }
     
 //    winner scores +1 pt
     func scorePoint(roomCode: String) {
@@ -396,10 +336,8 @@ class FirebaseManager: ObservableObject {
 
 internal class MockFirebaseManager: FirebaseManager {
     override func startGame(name: String, roomCode: String) -> String {
-//        let player = Player(name: "Ada", totalScore: 0)
         let gameRoom = GameRoom(
                                 roomCode: roomCode,
-//                                rounds: [],
                                 gameStart: Date()
                                 )
         
