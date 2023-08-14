@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct VotingPlayerView: View {
+    @EnvironmentObject var promptManager: PromptManager
     @EnvironmentObject var firebaseManager: FirebaseManager
+    @State private var changeView = false
     
     var body: some View {
         GeometryReader { geo in
@@ -23,18 +25,34 @@ struct VotingPlayerView: View {
                     Text("Voting Time")
                         .font(.title)
                     
-//                    Text("<timer>")
-//                        .font(.title)
-//                        .padding(.vertical)
-                    
-                    // render ResultView
-                    
                     Text("Waiting for \(firebaseManager.currentJudgeID) to vote")
                         .font(.title2)
+                    
+                    if firebaseManager.isWinnerUpdated {
+                        Button {
+
+                        } label: {
+
+                        }
+                        .navigationDestination(isPresented: $changeView) {
+                            ResultView()
+                                .environmentObject(firebaseManager)
+                                .environmentObject(promptManager)
+                                .navigationBarBackButtonHidden(true)
+                        }
+                    }
                     
                     Spacer()
                 }
                 .padding(.top, 70)
+            }
+            .onAppear {
+                firebaseManager.checkWinner(roomCode: firebaseManager.finalRoomCode)
+            }
+            .onChange(of: firebaseManager.isWinnerUpdated) { newValue in
+                if newValue {
+                    changeView = true
+                }
             }
         }
     }
@@ -44,5 +62,6 @@ struct VotingPlayerView_Previews: PreviewProvider {
     static var previews: some View {
         VotingPlayerView()
             .environmentObject(FirebaseManager(gameRooms: []))
+            .environmentObject(PromptManager(prompts: []))
     }
 }

@@ -26,6 +26,7 @@ struct RoundPlayerView: View {
                         .padding()
                         .navigationDestination(isPresented: $countdownFinished) {
                             VotingPlayerView()
+                                .environmentObject(promptManager)
                                 .environmentObject(firebaseManager)
                                 .navigationBarBackButtonHidden(true)
                         }
