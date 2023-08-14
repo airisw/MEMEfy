@@ -318,6 +318,17 @@ class FirebaseManager: ObservableObject {
         }
     }
     
+//    func get winner from Firebase
+    func getWinner(roomCode: String) {
+        db.collection("gameRoom/\(roomCode)/rounds").document(self.roundDocID).getDocument { (document, error) in
+            if let document = document, document.exists {
+                if let winnerId = document.data()?["winnerId"] as? String {
+                    self.winnerId = winnerId
+                }
+            }
+        }
+    }
+    
 //    func delete gameRoom
     func deleteGameRoom(roomCode: String) {
         db.collection("gameRoom/\(roomCode)/rounds").document(self.roundDocID).delete() { error in

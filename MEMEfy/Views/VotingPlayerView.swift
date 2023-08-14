@@ -51,6 +51,7 @@ struct VotingPlayerView: View {
             }
             .onChange(of: firebaseManager.isWinnerUpdated) { newValue in
                 if newValue {
+                    firebaseManager.getWinner(roomCode: firebaseManager.finalRoomCode)
                     changeView = true
                 }
             }
