@@ -18,7 +18,7 @@ struct VotingForm: View {
         ScrollView {
             Button {
                 firebaseManager.fetchWinnerId(roomCode: firebaseManager.finalRoomCode, winnerGIF: selectedGif) {
-                    firebaseManager.updateWinner(roomCode: firebaseManager.finalRoomCode)
+                    firebaseManager.updateWinner(roomCode: firebaseManager.finalRoomCode, winnerGIF: selectedGif)
                     
                     firebaseManager.scorePoint(roomCode: firebaseManager.finalRoomCode)
                 }

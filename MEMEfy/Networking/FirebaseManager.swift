@@ -31,6 +31,7 @@ class FirebaseManager: ObservableObject {
     @Published fileprivate(set) var winnerId = ""
     @Published fileprivate(set) var isWinnerUpdated = false
     @Published fileprivate(set) var winnerSubmission: String?
+    @Published fileprivate(set) var winnerGifUrl: String?
     
     let db = Firestore.firestore()
     
@@ -87,7 +88,8 @@ class FirebaseManager: ObservableObject {
         
         let newRound = Round(judgeId: "",
                              winnerId: "",
-                             promptId: "",
+//                             promptId: "",
+                             winnerGifUrl: "",
                              roundStart: Date())
         
         do {
@@ -257,9 +259,18 @@ class FirebaseManager: ObservableObject {
         }
     }
     
-    func updateWinner(roomCode: String) {
+    func updateWinner(roomCode: String, winnerGIF: String?) {
+//        db.collection("gameRoom/\(roomCode)/rounds").document(self.roundDocID)
+//            .setData(["winnerId": self.winnerId], merge: true)
+        
+        var dataToUpdate = ["winnerId": self.winnerId]
+        
+        if let winnerGIF = winnerGIF {
+            dataToUpdate["winnerGifUrl"] = winnerGIF
+        }
+        
         db.collection("gameRoom/\(roomCode)/rounds").document(self.roundDocID)
-            .setData(["winnerId": self.winnerId], merge: true)
+            .setData(dataToUpdate, merge: true)
     }
     
 //    winner scores +1 pt
@@ -335,6 +346,16 @@ class FirebaseManager: ObservableObject {
             if let document = document, document.exists {
                 if let gifUrl = document.data()?["gifUrl"] as? String {
                     self.winnerSubmission = gifUrl
+                }
+            }
+        }
+    }
+    
+    func getWinnerGifUrl(roomCode: String) {
+        db.collection("gameRoom/\(roomCode)/rounds").document(self.roundDocID).getDocument { (document, error) in
+            if let document = document, document.exists {
+                if let winnerGifUrl = document.data()?["winnerGifUrl"] as? String {
+                    self.winnerGifUrl = winnerGifUrl
                 }
             }
         }

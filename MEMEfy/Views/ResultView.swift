@@ -27,7 +27,7 @@ struct ResultView: View {
                     Text("Result")
                         .font(.title)
                     
-                    Result(selectedGif: selectedGif)
+                    Result()
                         .environmentObject(promptManager)
                         .environmentObject(firebaseManager)
                     

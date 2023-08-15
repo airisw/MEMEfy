@@ -11,7 +11,7 @@ import Kingfisher
 struct Result: View {
     @EnvironmentObject var promptManager: PromptManager
     @EnvironmentObject var firebaseManager: FirebaseManager
-    var selectedGif: String?
+//    var selectedGif: String?
     
     var body: some View {
         VStack {
@@ -21,11 +21,14 @@ struct Result: View {
             Text("\(firebaseManager.winnerId) +1 pt")
                 .padding(.vertical)
             
-            if let gifUrl = selectedGif, let url = URL(string: gifUrl) {
+            if let gifUrl = firebaseManager.winnerGifUrl, let url = URL(string: gifUrl) {
                 KFAnimatedImage(url)
                     .scaledToFit()
                     .scaleEffect(0.8)
             }
+        }
+        .onAppear {
+            firebaseManager.getWinnerGifUrl(roomCode: firebaseManager.finalRoomCode)
         }
     }
 }
