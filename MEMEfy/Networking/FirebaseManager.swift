@@ -30,6 +30,7 @@ class FirebaseManager: ObservableObject {
     @Published fileprivate(set) var submissions = [String]()
     @Published fileprivate(set) var winnerId = ""
     @Published fileprivate(set) var isWinnerUpdated = false
+    @Published fileprivate(set) var winnerSubmission: String?
     
     let db = Firestore.firestore()
     
@@ -324,6 +325,16 @@ class FirebaseManager: ObservableObject {
             if let document = document, document.exists {
                 if let winnerId = document.data()?["winnerId"] as? String {
                     self.winnerId = winnerId
+                }
+            }
+        }
+    }
+    
+    func getWinnerSubmission(roomCode: String) {
+        db.collection("gameRoom/\(roomCode)/rounds/\(self.roundDocID)/submissions").document(self.winnerId).getDocument { (document, error) in
+            if let document = document, document.exists {
+                if let gifUrl = document.data()?["gifUrl"] as? String {
+                    self.winnerSubmission = gifUrl
                 }
             }
         }

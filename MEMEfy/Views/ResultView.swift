@@ -11,6 +11,7 @@ struct ResultView: View {
     @EnvironmentObject var promptManager: PromptManager
     @EnvironmentObject var firebaseManager: FirebaseManager
     @State private var isEndGameTapped = false
+    @State private var isNextRoundTapped = false
     var selectedGif: String?
     
     var body: some View {
@@ -36,12 +37,27 @@ struct ResultView: View {
                     HStack {
                         Button {
                             print("Next Round starting")
+                            firebaseManager.addRound(roomCode: firebaseManager.finalRoomCode)
+                            firebaseManager.getRoundStart(roomCode: firebaseManager.finalRoomCode)
+                            firebaseManager.updateJudgeID(roomCode: firebaseManager.finalRoomCode)
+                            isNextRoundTapped = true
                         } label: {
                             Text("Next Round")
                                 .padding()
                         }
-                        // choose judgeid
-                        // brings to roundjudgeview or roundplayerview
+                        .navigationDestination(isPresented: $isNextRoundTapped) {
+                            if firebaseManager.currentJudgeID == firebaseManager.currentPlayerID {
+                                RoundJudgeView()
+                                    .environmentObject(promptManager)
+                                    .environmentObject(firebaseManager)
+                                    .navigationBarBackButtonHidden(true)
+                            } else {
+                                RoundPlayerView()
+                                    .environmentObject(promptManager)
+                                    .environmentObject(firebaseManager)
+                                    .navigationBarBackButtonHidden(true)
+                            }
+                        }
                         
                         Button {
                             print("End of Game")
@@ -55,8 +71,6 @@ struct ResultView: View {
                             ContentView(firebaseManager: FirebaseManager(gameRooms: []))
                                 .navigationBarBackButtonHidden(true)
                         }
-                        // deletes roomCode
-                        // deletes iscustom true -> only for roomcode
                     }
                 }
             }
