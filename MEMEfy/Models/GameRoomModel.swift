@@ -24,7 +24,6 @@ struct Round: Codable, Identifiable {
     @DocumentID var id: String?
     var judgeId: String
     var winnerId: String
-//    var promptId: String
     var winnerGifUrl: String
     var roundStart: Date
 }
