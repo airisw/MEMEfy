@@ -353,6 +353,24 @@ class FirebaseManager: ObservableObject {
                 print("Error deleting gameRoom: \(error)")
             }
         }
+        
+        let playersRef = db.collection("gameRoom/\(roomCode)/players")
+            
+        playersRef.getDocuments() { (querySnapshot, error) in
+            if let error = error {
+                print("Error fetching players documents to delete: \(error)")
+            }
+            
+            for document in querySnapshot!.documents {
+                let playerId = document["name"] as? String ?? ""
+                playersRef.document(playerId).delete() { error in
+                    if let error = error {
+                        print("Error deleting player documents: \(error)")
+                    }
+                }
+                
+            }
+        }
     }
 }
 
