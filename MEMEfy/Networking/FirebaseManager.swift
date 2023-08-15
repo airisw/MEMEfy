@@ -70,7 +70,7 @@ class FirebaseManager: ObservableObject {
         return finalRoomCode
     }
     
-//    add players as sub collection to gameRoom
+//    create players as sub collection to gameRoom
     func addPlayers(name:String, roomCode: String) {
         let newPlayerRef = db.collection("gameRoom").document(roomCode).collection("players").document(name)
     
@@ -83,12 +83,12 @@ class FirebaseManager: ObservableObject {
         }
     }
     
+//    create rounds as sub collection
     func addRound(roomCode: String) {
         let newRoundRef = db.collection("gameRoom").document(roomCode).collection("rounds").document()
         
         let newRound = Round(judgeId: "",
                              winnerId: "",
-//                             promptId: "",
                              winnerGifUrl: "",
                              roundStart: Date())
         
@@ -102,6 +102,7 @@ class FirebaseManager: ObservableObject {
         addSubmissions(roomCode: roomCode, name: self.currentPlayerID)
     }
     
+//    create submissions as sub collection
     func addSubmissions(roomCode: String, name: String) {
         let newSubRef = db.collection("gameRoom").document(roomCode).collection("rounds").document(self.roundDocID).collection("submissions").document(name)
         
@@ -134,10 +135,12 @@ class FirebaseManager: ObservableObject {
         }
     }
     
+//    updates gameStart timestamp
     func updateGameStart(roomCode: String) {
         db.collection("gameRoom").document(roomCode).setData(["gameStart": Date()], merge: true)
     }
     
+//    gets gameStart timestamp for PersonalizePrompts timer
     func getGameStart(roomCode: String) {
         db.collection("gameRoom").document(roomCode).getDocument { (document, error) in
             if let document = document, document.exists {
@@ -157,6 +160,7 @@ class FirebaseManager: ObservableObject {
         }
     }
     
+//    selects judge for current round
     func getJudgeID(roomCode: String, completion: @escaping () -> Void) {
         db.collection("gameRoom/\(roomCode)/players").getDocuments() { (querySnapshot, error) in
             if let error = error {
@@ -192,18 +196,20 @@ class FirebaseManager: ObservableObject {
         }
     }
     
-//     submit gif url
+//     submits gif url
     func submitURL(roomCode: String, url: String) {
         db.collection("gameRoom/\(roomCode)/rounds/\(self.roundDocID)/submissions")
             .document(self.subDocID).setData(["gifUrl": url], merge: true)
     }
     
+//    updates roundStart timestamp for rounds
     func updateRoundStart(roomCode: String) {
         print("upadting roundstart")
         db.collection("gameRoom/\(roomCode)/rounds")
             .document(self.roundDocID).setData(["roundStart": Date()], merge: true)
     }
     
+//     gets round start timestamp for timer
     func getRoundStart(roomCode: String) {
         db.collection("gameRoom/\(roomCode)/rounds").document(self.roundDocID).getDocument { (document, error) in
             if let document = document, document.exists {
@@ -212,9 +218,9 @@ class FirebaseManager: ObservableObject {
                     print("roundStart from Firebase: \(date)")
                     
                     let calendar = Calendar.current
-                    if let modifiedDate = calendar.date(byAdding: .second, value: 30, to: date) {
+                    if let modifiedDate = calendar.date(byAdding: .second, value: 60, to: date) {
                         self.modifiedRoundStart = modifiedDate
-                        print("added 30 secs: \(self.modifiedRoundStart)")
+                        print("added 60 secs: \(self.modifiedRoundStart)")
                     }
                 }
             } else {
@@ -223,7 +229,7 @@ class FirebaseManager: ObservableObject {
         }
     }
     
-//    func get submissions
+//    gets players' GIF submissions
     func fetchGifs(roomCode: String) {
         db.collection("gameRoom/\(roomCode)/rounds/\(self.roundDocID)/submissions").getDocuments() { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
@@ -239,7 +245,7 @@ class FirebaseManager: ObservableObject {
         }
     }
     
-//    func update winner
+//    updates winner for current round
     func fetchWinnerId(roomCode: String, winnerGIF: String?, completion: @escaping () -> Void) {
         if let winnerGIF = winnerGIF {
             db.collection("gameRoom/\(roomCode)/rounds/\(self.roundDocID)/submissions")
@@ -260,9 +266,6 @@ class FirebaseManager: ObservableObject {
     }
     
     func updateWinner(roomCode: String, winnerGIF: String?) {
-//        db.collection("gameRoom/\(roomCode)/rounds").document(self.roundDocID)
-//            .setData(["winnerId": self.winnerId], merge: true)
-        
         var dataToUpdate = ["winnerId": self.winnerId]
         
         if let winnerGIF = winnerGIF {
@@ -309,7 +312,7 @@ class FirebaseManager: ObservableObject {
         }
     }
     
-//    func get real time updates of winner
+//    gets real time updates of winner
     func checkWinner(roomCode: String) {
         db.collection("gameRoom/\(roomCode)/rounds").document(self.roundDocID).addSnapshotListener { (documentSnapshot, error) in
             guard let document = documentSnapshot else {
@@ -330,7 +333,7 @@ class FirebaseManager: ObservableObject {
         }
     }
     
-//    func get winner from Firebase
+//    gets winner from Firebase
     func getWinner(roomCode: String) {
         db.collection("gameRoom/\(roomCode)/rounds").document(self.roundDocID).getDocument { (document, error) in
             if let document = document, document.exists {
@@ -341,16 +344,18 @@ class FirebaseManager: ObservableObject {
         }
     }
     
-    func getWinnerSubmission(roomCode: String) {
-        db.collection("gameRoom/\(roomCode)/rounds/\(self.roundDocID)/submissions").document(self.winnerId).getDocument { (document, error) in
-            if let document = document, document.exists {
-                if let gifUrl = document.data()?["gifUrl"] as? String {
-                    self.winnerSubmission = gifUrl
-                }
-            }
-        }
-    }
+//    gets winner's GIF submission
+//    func getWinnerSubmission(roomCode: String) {
+//        db.collection("gameRoom/\(roomCode)/rounds/\(self.roundDocID)/submissions").document(self.winnerId).getDocument { (document, error) in
+//            if let document = document, document.exists {
+//                if let gifUrl = document.data()?["gifUrl"] as? String {
+//                    self.winnerSubmission = gifUrl
+//                }
+//            }
+//        }
+//    }
     
+//    gets winner's submission
     func getWinnerGifUrl(roomCode: String) {
         db.collection("gameRoom/\(roomCode)/rounds").document(self.roundDocID).getDocument { (document, error) in
             if let document = document, document.exists {
@@ -361,7 +366,7 @@ class FirebaseManager: ObservableObject {
         }
     }
     
-//    func delete gameRoom
+//    deletes gameRoom
     func deleteGameRoom(roomCode: String) {
         db.collection("gameRoom/\(roomCode)/rounds").document(self.roundDocID).delete() { error in
             if let error = error {
@@ -375,6 +380,7 @@ class FirebaseManager: ObservableObject {
             }
         }
         
+//        deletes players sub collection
         let playersRef = db.collection("gameRoom/\(roomCode)/players")
             
         playersRef.getDocuments() { (querySnapshot, error) in
@@ -389,7 +395,6 @@ class FirebaseManager: ObservableObject {
                         print("Error deleting player documents: \(error)")
                     }
                 }
-                
             }
         }
     }
